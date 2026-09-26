@@ -1,0 +1,486 @@
+/* Photorealistic Laptop Device Container */
+.laptop-device {
+  position: relative;
+  width: 100%;
+  max-width: var(--laptop-max-width, 640px);
+  aspect-ratio: var(--laptop-aspect-ratio, 2070 / 1585);
+  z-index: 3;
+  margin: 0 auto;
+  user-select: none;
+  cursor: pointer;
+  transition: 
+    transform var(--duration-hover) var(--ease-hover),
+    filter var(--duration-hover) var(--ease-hover);
+}
+
+.laptop-device:hover {
+  transform: translateY(-5px) scale(1.012);
+  filter: drop-shadow(0 20px 42px var(--theme-glow-primary));
+}
+
+.laptop-device:active {
+  transform: translateY(-1px) scale(1.005);
+}
+
+/* High-Resolution Photorealistic Laptop Chassis Frame Image */
+.laptop-frame-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  pointer-events: none;
+  z-index: 5;
+  filter: drop-shadow(0 14px 28px rgba(10, 8, 6, 0.45));
+}
+
+/* The Screen Viewport (Where the product dashboard / video is displayed) */
+.laptop-screen {
+  position: absolute;
+  top: var(--laptop-screen-top, 1.45%);
+  left: var(--laptop-screen-left, 9.13%);
+  width: var(--laptop-screen-width, 81.06%);
+  height: var(--laptop-screen-height, 66.18%);
+  background: #000000;
+  border-radius: var(--laptop-screen-radius, 12px 12px 0 0);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Screen Glass Reflection Sheen & Glare */
+.laptop-screen-glare {
+  position: absolute;
+  top: var(--laptop-screen-top, 1.45%);
+  left: var(--laptop-screen-left, 9.13%);
+  width: var(--laptop-screen-width, 81.06%);
+  height: var(--laptop-screen-height, 66.18%);
+  pointer-events: none;
+  z-index: 6;
+  border-radius: var(--laptop-screen-radius, 12px 12px 0 0);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 42%, transparent 58%);
+}
+
+/* Laptop Top Lid / Display Bezel Fallback */
+.laptop-lid {
+  position: relative;
+  background: linear-gradient(180deg, #c4de8e 0%, #b3d379 100%);
+  border-radius: 18px 18px 2px 2px;
+  padding: 8px 8px 10px 8px;
+  box-shadow: 
+    0 -2px 6px rgba(255, 255, 255, 0.25),
+    0 16px 36px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(135, 170, 85, 0.45);
+}
+
+/* Web Camera Notch at top center */
+.laptop-camera {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 8px;
+  background: #0b0d0b;
+  border-radius: 0 0 5px 5px;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.laptop-camera::after {
+  content: '';
+  width: 3.5px;
+  height: 3.5px;
+  background: #1f2a1b;
+  border-radius: 50%;
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Laptop Base / Keyboard Deck in 3D Perspective */
+.laptop-base {
+  position: relative;
+  width: 110%;
+  left: -5%;
+  background: linear-gradient(180deg, #b9d77f 0%, #a8cc6c 50%, #9bc05e 100%);
+  border-radius: 2px 2px 18px 18px;
+  box-shadow: 
+    0 18px 36px rgba(0, 0, 0, 0.45),
+    0 32px 55px rgba(20, 16, 12, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: perspective(700px) rotateX(25deg);
+  transform-origin: top center;
+  margin-top: -5px;
+  padding: 8px 14px 10px;
+  border: 1px solid rgba(135, 170, 85, 0.45);
+}
+
+/* Recessed Keyboard Deck */
+.laptop-keyboard-deck {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.laptop-keyboard {
+  width: 90%;
+  background: #9abf60;
+  border-radius: 6px;
+  padding: 4px 6px;
+  box-shadow: 
+    inset 0 1px 4px rgba(0, 0, 0, 0.22),
+    0 1px 0 rgba(255, 255, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5px;
+}
+
+.kbd-row {
+  display: flex;
+  gap: 2.5px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.key {
+  flex: 1;
+  height: 12px;
+  background: #cbe699;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 6px;
+  font-weight: 700;
+  color: #4b6325;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 1px 1px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  user-select: none;
+  transition: transform 0.08s ease, background 0.08s ease;
+}
+
+.key:hover {
+  background: #d8f0aa;
+  transform: translateY(-0.5px);
+}
+
+.key--esc,
+.key--touchid {
+  flex: 1.2;
+}
+
+.key--touchid {
+  background: #93b558;
+  border-radius: 50%;
+  flex: 0 0 12px;
+}
+
+.key--tab,
+.key--del {
+  flex: 1.4;
+}
+
+.key--caps,
+.key--return {
+  flex: 1.7;
+}
+
+.key--shift {
+  flex: 2.1;
+}
+
+.key--space {
+  flex: 5.5;
+}
+
+.key--mod {
+  flex: 1.1;
+}
+
+.key--cmd {
+  flex: 1.3;
+}
+
+/* Tactile Lime Trackpad */
+.laptop-trackpad {
+  width: 36%;
+  height: 44px;
+  background: linear-gradient(180deg, #b5d57b 0%, #a7c96c 100%);
+  border-radius: 6px;
+  border: 1px solid rgba(115, 145, 65, 0.4);
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.laptop-trackpad:hover {
+  background: #bde082;
+}
+
+/* Opening Notch Cutout in Front Edge */
+.laptop-notch {
+  width: 58px;
+  height: 4px;
+  background: #89a950;
+  border-radius: 0 0 4px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: 4px;
+}
+
+/* Inside Screen Dashboard UI Styles */
+.screen-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background: #f8fafc;
+  color: #1e293b;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  transition: opacity var(--duration-fast) ease, transform var(--duration-fast) ease;
+}
+
+.screen-content.transitioning {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* Screen Media Video Player Container */
+.screen-video-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #0b0f0e;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--duration-fast) ease, transform var(--duration-fast) ease;
+}
+
+.screen-video-wrapper.transitioning {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.screen-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.screen-video-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, transparent 40%, rgba(0, 0, 0, 0.25) 100%);
+}
+
+/* Left Mini Sidebar */
+.dash-sidebar {
+  width: 28%;
+  max-width: 130px;
+  background: #0f172a;
+  color: #94a3b8;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-right: 1px solid #1e293b;
+  flex-shrink: 0;
+}
+
+.dash-brand {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 2px 4px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dash-brand svg {
+  width: 14px;
+  height: 14px;
+  color: var(--moss-accent);
+}
+
+.dash-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 8.5px;
+  transition: background 0.15s ease;
+}
+
+.dash-menu-item.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.dash-menu-item svg {
+  width: 11px;
+  height: 11px;
+  opacity: 0.8;
+}
+
+/* Main Dashboard Canvas */
+.dash-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+.dash-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dash-search-box {
+  background: #f1f5f9;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 8px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 50%;
+}
+
+.dash-user-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dash-avatar {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 700;
+  color: #334155;
+}
+
+/* Dashboard Body with Gantt / Chart layout */
+.dash-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 35% 42% 23%;
+  padding: 8px;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.dash-col-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.dash-col-title {
+  font-weight: 700;
+  font-size: 8.5px;
+  color: #0f172a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+/* Mini Gantt Bars */
+.gantt-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gantt-line {
+  height: 6px;
+  border-radius: 3px;
+  background: #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.gantt-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 3px;
+}
+
+/* Mobile responsive laptop */
+@media (max-width: 640px) {
+  .laptop-device {
+    max-width: 96%;
+  }
+
+  .laptop-lid {
+    border-radius: 12px 12px 3px 3px;
+    padding: 6px 6px 8px 6px;
+  }
+
+  .dash-sidebar {
+    width: 24%;
+    padding: 4px;
+    gap: 3px;
+  }
+
+  .dash-brand {
+    font-size: 8px;
+  }
+
+  .dash-menu-item {
+    font-size: 7px;
+    padding: 2px 3px;
+  }
+
+  .dash-body {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dash-body > :last-child {
+    display: none;
+  }
+}

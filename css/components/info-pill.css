@@ -1,0 +1,117 @@
+/* Bottom Product Info Pill (Sitting atop moss pedestal) */
+.product-info-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(var(--theme-card-rgb), 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-xl);
+  padding: 0.65rem 1.25rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 
+    0 14px 32px rgba(0, 0, 0, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+  gap: 1rem;
+  transition: 
+    transform var(--duration-hover) var(--ease-hover),
+    box-shadow var(--duration-hover) var(--ease-hover),
+    border-color var(--duration-hover-out) var(--ease-smooth),
+    background-color var(--duration-hover-out) var(--ease-smooth);
+}
+
+.product-info-pill:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 22px 46px rgba(0, 0, 0, 0.52),
+    0 0 0 2px var(--theme-glow-primary);
+}
+
+.pill-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pill-title {
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--theme-text);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.pill-meta {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--theme-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.meta-divider {
+  opacity: 0.5;
+}
+
+/* Info Icon Pill Button */
+.pill-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--theme-primary);
+  border: 1px solid var(--theme-border);
+  color: var(--theme-bg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  transition: 
+    transform var(--duration-hover) var(--ease-hover),
+    background-color 0.35s var(--ease-smooth),
+    color 0.25s ease,
+    box-shadow var(--duration-hover) var(--ease-hover);
+}
+
+.pill-action-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.pill-action-btn:hover {
+  background: var(--theme-accent);
+  color: #ffffff;
+  transform: scale(1.05) rotate(1.5deg);
+  box-shadow: 0 6px 16px var(--theme-glow-cta);
+}
+
+.pill-action-btn:active {
+  transform: scale(0.95);
+}
+
+/* Mobile responsive info pill */
+@media (max-width: 640px) {
+  .product-info-pill {
+    padding: 0.5rem 0.85rem;
+    max-width: 92vw;
+    gap: 0.75rem;
+  }
+
+  .pill-title {
+    font-size: 1.05rem;
+  }
+
+  .pill-meta {
+    font-size: 0.72rem;
+  }
+
+  .pill-action-btn {
+    width: 36px;
+    height: 36px;
+  }
+}

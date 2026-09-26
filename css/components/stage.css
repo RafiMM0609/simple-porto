@@ -1,0 +1,103 @@
+/* Stage Environment & Moss Pedestal */
+.stage-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Ambient Radial Glow behind the Laptop */
+.stage-glow {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 580px;
+  height: 380px;
+  background: radial-gradient(ellipse at center, rgba(var(--theme-primary-rgb), 0.28) 0%, rgba(var(--theme-border-rgb), 0.15) 40%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pedestal Rock Foundation & Desk Mat Contact Shadow */
+.moss-pedestal {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin-top: -8px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.rock-graphic {
+  display: none; /* Replaced by photorealistic studio desk */
+}
+
+.laptop-contact-shadow {
+  width: 86%;
+  height: 24px;
+  background: radial-gradient(ellipse at center, rgba(16, 12, 9, 0.75) 0%, rgba(16, 12, 9, 0.3) 50%, transparent 80%);
+  filter: blur(8px);
+  margin-top: -8px;
+}
+
+/* Carousel Dots Wrapper sitting cleanly below the laptop base */
+.pedestal-info-wrapper {
+  position: relative;
+  margin-top: 14px;
+  z-index: 6;
+  pointer-events: auto;
+}
+
+@media (max-width: 640px) {
+  .moss-pedestal {
+    margin-top: -6px;
+    max-width: 92%;
+  }
+
+  .pedestal-info-wrapper {
+    margin-top: 6px;
+  }
+}
+
+@media (max-height: 820px) {
+  .moss-pedestal {
+    margin-top: -6px;
+    max-width: 530px;
+  }
+
+  .pedestal-info-wrapper {
+    margin-top: 6px;
+  }
+
+  .stage-glow {
+    width: 440px;
+    height: 300px;
+  }
+}
+
+/* Ambient Dust / Particle Sparks */
+.ambient-mote {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--theme-text-muted);
+  box-shadow: 0 0 10px var(--theme-primary);
+  pointer-events: none;
+  animation: float-mote 6s infinite ease-in-out;
+}
+
+@keyframes float-mote {
+  0%, 100% {
+    transform: translateY(0px) scale(0.9);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 0.8;
+  }
+}

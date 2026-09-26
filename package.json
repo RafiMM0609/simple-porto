@@ -1,0 +1,21 @@
+{
+  "name": "porto-product-only",
+  "version": "1.0.0",
+  "description": "ProductZero - Discover Our Web Products (Gen Z Aesthetic Showcase)",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/css-unit-tests.test.js",
+    "start": "npx serve -l 3210 ."
+  },
+  "keywords": [
+    "showcase",
+    "gen-z",
+    "raw-css",
+    "productzero"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sharp": "^0.35.4"
+  }
+}

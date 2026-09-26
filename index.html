@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ProductZero — Discover Our Web Products</title>
+  <meta name="description"
+    content="Discover modern web products: Apex CRM, Nova Analytics, Pulse eCommerce, Terra Projects, and Aura AI. Swipe or click to explore interactive previews.">
+
+  <!-- Modern Typography (DM Sans & Fraunces Editorial Serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Master Stylesheet (Raw Vanilla CSS) -->
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+
+  <!-- Ambient Cyber-Organic Atmosphere -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="ambient-circuits"></div>
+    <div class="ambient-mote" style="top: 25%; left: 20%; width: 5px; height: 5px; animation-delay: 0s;"></div>
+    <div class="ambient-mote" style="top: 65%; left: 15%; width: 6px; height: 6px; animation-delay: 2s;"></div>
+    <div class="ambient-mote" style="top: 30%; right: 18%; width: 4px; height: 4px; animation-delay: 1.5s;"></div>
+    <div class="ambient-mote" style="top: 70%; right: 22%; width: 7px; height: 7px; animation-delay: 3.5s;"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Top Site Header & Floating Pill Navbar -->
+    <header class="site-header">
+      <a href="#" class="brand-logo" id="brand-logo" aria-label="ProductZero Home">
+        productzero
+      </a>
+
+      <!-- Center Header Card Title (Replaces Floating Pill Navbar) -->
+      <div class="header-product-badge" id="header-product-badge" role="status" aria-live="polite"
+        title="Active Product: Click to view details">
+        <span class="card-title header-card-title" id="header-card-title">Apex CRM</span>
+        <span class="header-card-badge" id="header-card-badge">v3.0</span>
+      </div>
+
+      <!-- Right Action: Tactile Audio Toggle Button -->
+      <button class="header-action-btn" id="sound-toggle-btn" aria-label="Toggle Tactile Haptics Sound"
+        title="Tactile Sound FX">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Main Showcase Arena -->
+    <main class="showcase-stage" id="showcase-stage">
+
+      <div class="swipe-hint-pill" aria-hidden="true">
+        <span>👈 Swipe left/right to browse 👉</span>
+      </div>
+
+      <!-- Main Showcase Grid with Flanking Cards and Center Laptop -->
+      <div class="showcase-grid">
+
+        <!-- Cyber-Organic Orbital Track Rings & Constellation Filaments -->
+        <svg class="orbital-tracks-svg" viewBox="0 0 1200 650" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Outer Elliptical Orbital Path -->
+          <ellipse class="orbital-ring-path orbital-ring-path--outer" cx="600" cy="315" rx="550" ry="240" />
+          <!-- Inner Elliptical Orbital Path -->
+          <ellipse class="orbital-ring-path orbital-ring-path--inner" cx="600" cy="315" rx="430" ry="180" />
+          <!-- Orbital Cyber Filaments connecting toward Asymmetric Nodes -->
+          <path class="orbital-filament-line" d="M220 180 Q390 260 520 280" />
+          <path class="orbital-filament-line" d="M260 460 Q410 390 530 350" />
+          <path class="orbital-filament-line" d="M980 160 Q810 250 680 280" />
+          <path class="orbital-filament-line" d="M960 480 Q790 400 670 360" />
+          <!-- Orbit Beacons on tracks -->
+          <circle class="orbital-beacon" cx="170" cy="315" r="3.5" />
+          <circle class="orbital-beacon" cx="1030" cy="315" r="3.5" />
+        </svg>
+
+        <!-- Left Desktop Column: Orbital Nodes for Active Product -->
+        <div class="cards-column cards-column--left" id="mini-show-col-left" aria-label="Active Product Views (Left)">
+          <div class="orbital-node orbital-node--1">
+            <div class="mini-show-page" id="mini-page-1" role="button" tabindex="0" aria-label="Live Operations Preview">
+              <!-- Dynamically populated by JS for currently active product -->
+            </div>
+          </div>
+          <div class="orbital-node orbital-node--2">
+            <div class="mini-show-page" id="mini-page-2" role="button" tabindex="0" aria-label="Timeline & Milestones Preview">
+              <!-- Dynamically populated by JS for currently active product -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Podium: Laptop, Pedestal & Bottom Info -->
+        <div class="podium-center">
+          <!-- Ambient Spotlight Behind Screen -->
+          <div class="stage-glow" aria-hidden="true"></div>
+
+          <!-- Carousel Curved Left Button -->
+          <button class="carousel-btn carousel-btn--prev" id="carousel-prev" aria-label="Previous Product">
+            <svg viewBox="0 0 24 24">
+              <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <!-- Photorealistic Laptop Device -->
+          <div class="laptop-device" id="laptop-device" title="Click to open interactive preview">
+            <!-- Dynamic Interactive Screen Viewport (WebM Video / Live Dashboard) -->
+            <div class="laptop-screen" id="laptop-screen">
+              <!-- Live Dashboard / Video Injected Dynamically by JS -->
+            </div>
+            <!-- High-Resolution Photorealistic Laptop Chassis Frame -->
+            <img 
+              class="laptop-frame-img" 
+              src="./assets/laptop-chassis-frame.png" 
+              alt="MacBook Pro Laptop Chassis"
+              draggable="false"
+              loading="eager"
+            />
+            <!-- Screen Glass Sheen & Ambient Reflections -->
+            <div class="laptop-screen-glare" aria-hidden="true"></div>
+          </div>
+
+          <!-- Carousel Curved Right Button -->
+          <button class="carousel-btn carousel-btn--next" id="carousel-next" aria-label="Next Product">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <!-- Studio Desk Contact Shadow Layer -->
+          <div class="moss-pedestal" aria-hidden="true">
+            <div class="laptop-contact-shadow"></div>
+            <svg class="rock-graphic" viewBox="0 0 600 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M25 50 Z" />
+            </svg>
+          </div>
+
+          <!-- Bottom Info Pill Card sitting directly over the pedestal -->
+          <div class="pedestal-info-wrapper">
+
+            <!-- Carousel Pagination Dots -->
+            <div class="carousel-dots" id="carousel-dots" aria-label="Product navigation dots"></div>
+          </div>
+
+        </div>
+
+        <!-- Right Desktop Column: Orbital Nodes for Active Product -->
+        <div class="cards-column cards-column--right" id="mini-show-col-right" aria-label="Active Product Views (Right)">
+          <div class="orbital-node orbital-node--3">
+            <div class="mini-show-page" id="mini-page-3" role="button" tabindex="0" aria-label="Live Telemetry & SLAs Preview">
+              <!-- Dynamically populated by JS for currently active product -->
+            </div>
+          </div>
+          <div class="orbital-node orbital-node--4">
+            <div class="mini-show-page" id="mini-page-4" role="button" tabindex="0" aria-label="Ecosystem & Modules Preview">
+              <!-- Dynamically populated by JS for currently active product -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Mobile Cards Rail (Appears on screens <= 1024px) -->
+      <div class="mobile-cards-rail" aria-label="Swipeable Products Reel">
+        <!-- Injected dynamically by JS for smooth swiping -->
+      </div>
+
+    </main>
+
+    <!-- Site Footer with Editorial Display Headline -->
+    <footer class="site-footer">
+      <h1 class="section-title">Discover Our Web Products</h1>
+
+      <!-- Gen-Z Quick Filter Tags -->
+      <div class="filter-tags" aria-label="Category Filters">
+        <button class="filter-tag-btn active" data-tag="all">#All Products</button>
+        <button class="filter-tag-btn" data-tag="saas">#SaaS & CRM</button>
+        <button class="filter-tag-btn" data-tag="analytics">#Analytics</button>
+        <button class="filter-tag-btn" data-tag="commerce">#eCommerce</button>
+        <button class="filter-tag-btn" data-tag="ai">#Autonomous AI</button>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Product Detail Modal & WebM Full Video Lightbox Dialog -->
+  <dialog id="product-modal" class="product-modal modal-mode--detail" aria-labelledby="modal-title">
+    <!-- View A: Product Detail Overview ("as is", for screen-video click) -->
+    <div class="modal-surface modal-surface--detail" id="modal-detail-surface">
+      <!-- Mobile Pull / Drag Indicator -->
+      <div class="sheet-drag-handle" aria-hidden="true"></div>
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-product-identity">
+          <div class="modal-icon-badge"></div>
+          <div class="modal-title-box">
+            <h3 class="modal-title" id="modal-title">Apex CRM</h3>
+            <div class="modal-version-tag">v3.0 • Project Management</div>
+          </div>
+        </div>
+        <button class="modal-close-btn" aria-label="Close modal dialog">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Description Pitch -->
+      <p class="modal-desc" style="color: var(--cream-text-muted); font-size: 0.95rem; line-height: 1.55;">
+        Unified CRM and project timeline platform designed for agile teams who crave zero bloat and high velocity
+        delivery.
+      </p>
+
+      <!-- Bento Stats Grid -->
+      <div class="modal-bento-grid">
+        <div class="bento-stat-card">
+          <span class="bento-stat-num" id="modal-stat-users">15,000+</span>
+          <span class="bento-stat-label">Active Users</span>
+        </div>
+        <div class="bento-stat-card">
+          <span class="bento-stat-num" id="modal-stat-rating">4.9/5</span>
+          <span class="bento-stat-label">Store Rating</span>
+        </div>
+        <div class="bento-stat-card">
+          <span class="bento-stat-num" id="modal-stat-speed">&lt; 80ms</span>
+          <span class="bento-stat-label">P99 Latency</span>
+        </div>
+      </div>
+
+      <!-- Feature Badges List -->
+      <div>
+        <div
+          style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--cream-text-dim); margin-bottom: 0.5rem; font-weight: 700;">
+          Included Capabilities
+        </div>
+        <div class="modal-features-list">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="modal-actions">
+        <button class="btn-primary" id="modal-add-cart-btn">
+          Add to Workspace ✦
+        </button>
+        <button class="btn-secondary modal-close-btn"
+          style="border-radius: var(--radius-md); padding: 0.75rem 1.15rem; width: auto; height: auto;">
+          Close
+        </button>
+      </div>
+    </div>
+
+    <!-- View B: Full WebM Video Theater ("Secara Penuh" for mini-page click) -->
+    <div class="modal-surface modal-surface--video" id="modal-video-surface">
+      <div class="modal-video-topbar">
+        <div class="mini-window-dots">
+          <span class="dot dot--red"></span>
+          <span class="dot dot--yellow"></span>
+          <span class="dot dot--green"></span>
+        </div>
+        <div class="modal-video-info">
+          <span class="modal-video-title" id="video-modal-title">Apex CRM — Core Flow</span>
+          <span class="modal-video-tag">● WebM Full View</span>
+        </div>
+        <button class="modal-close-btn" aria-label="Close video pop up">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-full-video-frame modal-video-theater">
+        <video id="modal-popup-video" class="modal-large-video" autoplay loop controls playsinline>
+          <!-- Injected dynamically by JS -->
+        </video>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ES Module Application Logic -->
+  <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>

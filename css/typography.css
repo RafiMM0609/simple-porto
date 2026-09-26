@@ -1,0 +1,76 @@
+/* Brand Logo */
+.brand-logo {
+  font-family: var(--font-sans);
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--cream-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  text-transform: lowercase;
+  transition: 
+    opacity 0.35s var(--ease-smooth),
+    transform var(--duration-hover) var(--ease-hover);
+}
+
+.brand-logo:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+/* Display Title */
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.8vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--cream-text);
+  text-align: center;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin-top: 0.5rem;
+}
+
+/* Micro Details Hint */
+.interactive-hint {
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1.4vw, 0.85rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream-text-muted);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.7;
+    text-shadow: 0 0 10px var(--theme-glow-primary);
+  }
+  50% {
+    opacity: 1;
+    color: var(--theme-text);
+    text-shadow: 0 0 16px var(--theme-glow-accent);
+  }
+}
+
+/* Gen Z Pill Badges */
+.badge-pill {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
+  color: var(--cream-text);
+}

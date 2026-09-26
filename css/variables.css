@@ -1,0 +1,196 @@
+:root {
+  /* ==========================================================================
+     THEME COLOR PALETTE (WARM STUDIO, LIME MATCHA & RETRO RED ACCENT)
+     ========================================================================== */
+  --theme-bg: #1B1512;
+  /* Background utama: Deep warm walnut wood */
+  --theme-card: #251D18;
+  /* Card: Warm tactile studio brown/charcoal */
+  --theme-border: #44362B;
+  /* Border: Warm earthy border */
+  --theme-primary: #B8D97E;
+  /* Primary: Lime / Matcha green MacBook */
+  --theme-accent: #E03A27;
+  /* Accent (CTA): Glossy Tomato Red (Mushroom Lamp) */
+  --theme-text: #FBF9F4;
+  /* Text utama: Warm cream ivory */
+  --theme-text-muted: #D5DCBF;
+  /* Text sekunder: Pistachio cream muted */
+
+  /* ==========================================================================
+     SUBTLE, FRESH & BLENDED DESIGN TOKENS
+     - Warna di-mix background studio photorealistic
+     - Border tipis opacity rendah
+     - Shadow berlapis
+     ========================================================================== */
+  /* Channel RGB */
+  --theme-bg-rgb: 27, 21, 18;
+  --theme-card-rgb: 37, 29, 24;
+  --theme-border-rgb: 68, 54, 43;
+  --theme-primary-rgb: 184, 217, 126;
+  --theme-accent-rgb: 224, 58, 39;
+  --theme-text-rgb: 251, 249, 244;
+  --theme-mint-rgb: 184, 217, 126;
+
+  /* Surfaces Blended with Background */
+  --theme-card-surface: rgba(var(--theme-card-rgb), 0.42);
+  --theme-card-surface-hover: rgba(var(--theme-card-rgb), 0.62);
+  --theme-card-elevated: rgba(var(--theme-card-rgb), 0.52);
+  --theme-card-hover: rgba(20, 61, 55, 0.7);
+
+  /* Thin Low-Opacity Borders */
+  --theme-border-subtle: rgba(var(--theme-mint-rgb), 0.12);
+  --theme-border-subtle-hover: rgba(var(--theme-mint-rgb), 0.24);
+  --theme-border-quiet: rgba(255, 255, 255, 0.05);
+
+  /* Background Whisper Variations (Gradien hampir tidak kelihatan) */
+  --theme-bg-darkest: #081a17;
+  --theme-bg-surface: var(--theme-card-surface);
+  --theme-bg-overlay: rgba(var(--theme-bg-rgb), 0.78);
+
+  /* Shadows Berlapis (Multi-layered Atmospheric Shadows) */
+  --shadow-sm:
+    0 1px 2px rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.18);
+  --shadow-md:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 8px 18px rgba(0, 0, 0, 0.2),
+    0 20px 38px rgba(0, 0, 0, 0.28);
+  --shadow-lg:
+    0 2px 6px rgba(0, 0, 0, 0.12),
+    0 12px 28px rgba(0, 0, 0, 0.25),
+    0 32px 64px rgba(0, 0, 0, 0.38);
+  --shadow-card:
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.18),
+    0 20px 40px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(240, 253, 250, 0.06);
+  --shadow-card-hover:
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 14px 32px rgba(0, 0, 0, 0.22),
+    0 30px 60px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(240, 253, 250, 0.1);
+  --shadow-card-active:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 16px 36px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(240, 253, 250, 0.12);
+
+  /* Ambient Glows vs CTA Highlight */
+  --theme-glow-primary: rgba(var(--theme-primary-rgb), 0.1);
+  /* Tenang & halus */
+  --theme-glow-strong: rgba(var(--theme-primary-rgb), 0.18);
+  --theme-glow-cta:
+    0 2px 6px rgba(0, 0, 0, 0.15),
+    0 8px 22px rgba(var(--theme-accent-rgb), 0.4),
+    0 16px 36px rgba(var(--theme-accent-rgb), 0.22);
+  /* CUMA CTA YANG DI-HIGHLIGHT */
+  --glow-stage: 0 0 100px 30px rgba(var(--theme-primary-rgb), 0.07);
+
+  /* Orbital Floating Nodes Tokens */
+  --orbital-orbit-ring: rgba(var(--theme-mint-rgb), 0.08);
+  --orbital-orbit-ring-glow: rgba(var(--theme-primary-rgb), 0.14);
+  --orbital-node-glow: 0 0 24px rgba(var(--theme-primary-rgb), 0.2);
+  --orbital-track-dash: rgba(var(--theme-mint-rgb), 0.12);
+  --orbital-filament: rgba(var(--theme-mint-rgb), 0.09);
+
+  /* Glassmorphism & Pill Tokens */
+  --glass-bg: rgba(var(--theme-card-rgb), 0.45);
+  --glass-bg-hover: rgba(var(--theme-card-rgb), 0.65);
+  --glass-border: var(--theme-border-subtle);
+  --glass-border-active: rgba(var(--theme-mint-rgb), 0.28);
+  --glass-pill-dark: rgba(var(--theme-bg-rgb), 0.6);
+
+  /* ==========================================================================
+     LEGACY COMPATIBILITY TOKENS
+     (Memastikan unit test dan styling tetap lolos 100%)
+     ========================================================================== */
+  --color-primary: var(--theme-primary);
+  --color-secondary: var(--theme-text-muted);
+  --color-accent: var(--theme-accent);
+  --color-border: var(--theme-border-subtle);
+
+  --bg-darkest: var(--theme-bg-darkest);
+  --bg-base: var(--theme-bg);
+  --bg-surface: var(--theme-card-surface);
+  --bg-elevated: var(--theme-card-elevated);
+  --bg-overlay: var(--theme-bg-overlay);
+
+  --moss-glow: var(--theme-glow-primary);
+  --moss-glow-strong: var(--theme-glow-strong);
+  --moss-accent: var(--theme-primary);
+  --moss-accent-secondary: var(--theme-accent);
+  --moss-accent-dark: var(--theme-border-subtle);
+  --moss-rock: var(--theme-card);
+  --moss-rock-highlight: var(--theme-border-subtle);
+
+  /* Card & Text Aliases */
+  --cream-card: var(--theme-card-surface);
+  --cream-card-hover: var(--theme-card-surface-hover);
+  --cream-card-text: var(--theme-text);
+  --cream-card-subtext: var(--theme-text-muted);
+
+  --cream-text: var(--theme-text);
+  --cream-text-muted: rgba(var(--theme-text-rgb), 0.68);
+  --cream-text-dim: rgba(var(--theme-text-rgb), 0.42);
+
+  /* Typography */
+  --font-sans: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Fraunces', 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ==========================================================================
+     TRANSITION & EASING TOKENS (SILKY, FLUID & ELEGANT LUXURY MOTION)
+     ========================================================================== */
+  /* Fluid Deceleration & Elegant Hover Curves */
+  --ease-hover: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Apple/Linear fluid expo deceleration - ultra smooth */
+  --ease-hover-out: cubic-bezier(0.25, 1, 0.5, 1);
+  /* Natural gentle return when pointer leaves */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Fluid deceleration */
+  --ease-spring: cubic-bezier(0.25, 1.1, 0.45, 1);
+  /* Refined cushioned settle (subtle & elegant, no harsh jerk) */
+  --ease-spring-gentle: cubic-bezier(0.3, 1.12, 0.5, 1);
+  /* Soft organic physical feedback */
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  /* Soft ease-out */
+
+  /* Timing & Durations - Calibrated for Elegance & Poise */
+  --duration-hover: 0.48s;
+  /* Calibrated hover entry (graceful & weighted) */
+  --duration-hover-out: 0.42s;
+  /* Smooth hover exit */
+  --duration-fast: 0.55s;
+  /* Micro-interactions, quick tap/clicks */
+  --duration-normal: 0.45s;
+  /* Balanced transitions */
+  --duration-slow: 0.7s;
+  /* Large surfaces & ambient reveals */
+
+  /* Sizing & Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --max-width: 1400px;
+
+  /* ==========================================================================
+     LAPTOP MOCKUP & SCREEN CONFIGURATION TOKENS
+     Ubah variabel di bawah untuk mengatur ukuran mockup laptop & layar preview:
+     ========================================================================== */
+  --laptop-max-width: 640px;
+  /* Ukuran bodi laptop di desktop */
+  --laptop-aspect-ratio: 2070 / 1585;
+  /* Rasio frame bodi laptop (width / height) */
+  --laptop-screen-top: 1.45%;
+  /* Jarak atas layar dari frame laptop (23px / 1585px) */
+  --laptop-screen-left: 9.13%;
+  /* Jarak kiri layar dari frame laptop (189px / 2070px) */
+  --laptop-screen-width: 81.06%;
+  /* Lebar layar relatif terhadap frame bodi (1678px / 2070px) */
+  --laptop-screen-height: 66.18%;
+  /* Tinggi layar relatif terhadap frame bodi (1049px / 1585px) */
+  --laptop-screen-radius: 12px 12px 0 0;
+  /* Lengkungan sudut atas layar laptop */
+}

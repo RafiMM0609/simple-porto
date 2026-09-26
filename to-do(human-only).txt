@@ -1,0 +1,4 @@
+- cari gif transparent
+- background tambahkan animasi daun atau angin biar menarik
+- bikin gerakan css in out dari kanan ke kiri dan kiri ke kanan ketika transisi pergantian project
+
