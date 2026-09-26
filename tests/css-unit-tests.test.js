@@ -159,8 +159,8 @@ test('Mobile Responsiveness Media Queries', () => {
     'CSS must include tablet/responsive breakpoint @media (max-width: 1024px)'
   );
   assert.ok(
-    allCss.includes('.mobile-cards-rail'),
-    'CSS must define mobile cards rail for phone viewport'
+    allCss.includes('.mobile-reel-feed'),
+    'CSS must define mobile reel feed for phone viewport'
   );
 });
 
@@ -191,16 +191,15 @@ test('Keyframe Animations & Micro-interactions', () => {
 });
 
 test('Mobile Touch Scroll Snap Rules', () => {
-  const layoutCss = fs.readFileSync(path.join(cssDir, 'layout.css'), 'utf8');
-  const cardsCss = fs.readFileSync(path.join(cssDir, 'components/cards.css'), 'utf8');
+  const reelCss = fs.readFileSync(path.join(cssDir, 'components/mobile-reel.css'), 'utf8');
 
   assert.ok(
-    layoutCss.includes('scroll-snap-type: x mandatory'),
-    'layout.css must specify scroll-snap-type for horizontal mobile rail'
+    reelCss.includes('scroll-snap-type: y mandatory'),
+    'mobile-reel.css must specify scroll-snap-type: y mandatory for vertical reel feed'
   );
   assert.ok(
-    cardsCss.includes('scroll-snap-align: center'),
-    'cards.css must specify scroll-snap-align for mobile cards'
+    reelCss.includes('scroll-snap-align: start'),
+    'mobile-reel.css must specify scroll-snap-align: start for reel slides'
   );
 });
 
@@ -245,11 +244,15 @@ test('Desktop Mini Show Page Component Coverage', () => {
   }
 });
 
-test('Mobile Cards Rail Position Lowered 4x', () => {
-  const layoutCss = fs.readFileSync(path.join(cssDir, 'layout.css'), 'utf8');
+test('Mobile Full Screen Reel Viewport & Layout', () => {
+  const reelCss = fs.readFileSync(path.join(cssDir, 'components/mobile-reel.css'), 'utf8');
   assert.ok(
-    layoutCss.includes('margin-top: 2rem'),
-    'layout.css .mobile-cards-rail must be lowered 4x with margin-top: 2rem'
+    reelCss.includes('height: 100dvh'),
+    'mobile-reel.css must specify full-screen height: 100dvh'
+  );
+  assert.ok(
+    reelCss.includes('position: fixed'),
+    'mobile-reel.css must position reel feed as fixed full screen'
   );
 });
 

@@ -94,21 +94,6 @@
   box-shadow: 0 0 12px var(--theme-glow-primary);
 }
 
-/* Mobile Touch Swipe Indicator Pill */
-.swipe-hint-pill {
-  display: none;
-  align-items: center;
-  gap: 6px;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  font-size: 0.7rem;
-  color: var(--cream-text-muted);
-  font-family: var(--font-mono);
-  margin-bottom: 0.5rem;
-}
-
 @media (max-width: 640px) {
   .carousel-btn {
     width: 38px;
@@ -121,9 +106,5 @@
 
   .carousel-btn--next {
     right: 4px;
-  }
-
-  .swipe-hint-pill {
-    display: inline-flex;
   }
 }

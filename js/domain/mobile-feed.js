@@ -306,8 +306,8 @@ export class MobileReelFeed {
 
   setupResizeListener() {
     window.addEventListener('resize', () => {
-      // If switched to desktop view (>= 1024px), pause any running mobile video
-      if (window.innerWidth >= 1024) {
+      // If switched to desktop view (> 1024px), pause any running mobile video
+      if (window.innerWidth > 1024) {
         const videos = this.container.querySelectorAll('video');
         videos.forEach(v => {
           v.pause();

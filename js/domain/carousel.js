@@ -20,7 +20,6 @@ export class ProductCarousel {
     this.dotsContainer = options.dotsContainer;
     this.stageWrapper = options.stageWrapper;
     this.cards = options.cards || [];
-    this.mobileRail = options.mobileRail;
 
     this.onProductChange = options.onProductChange || (() => {});
 
@@ -112,29 +111,7 @@ export class ProductCarousel {
       }
     });
 
-    // 4. Update mobile rail cards
-    if (this.mobileRail) {
-      const railCards = this.mobileRail.querySelectorAll('.product-card');
-      railCards.forEach(card => {
-        const cardId = card.getAttribute('data-product-id');
-        if (cardId === product.id) {
-          card.classList.add('active');
-          // Smooth scroll active card into view inside the mobile rail only (avoid scrolling the window/ancestors)
-          const railRect = this.mobileRail.getBoundingClientRect();
-          const cardRect = card.getBoundingClientRect();
-          const currentScrollLeft = this.mobileRail.scrollLeft;
-          const cardRelativeLeft = cardRect.left - railRect.left + currentScrollLeft;
-          const targetScrollLeft = cardRelativeLeft - (this.mobileRail.clientWidth - card.clientWidth) / 2;
 
-          this.mobileRail.scrollTo({
-            left: targetScrollLeft,
-            behavior: isInitial ? 'auto' : 'smooth'
-          });
-        } else {
-          card.classList.remove('active');
-        }
-      });
-    }
 
     // 5. Update dots
     if (this.dotsContainer) {
@@ -182,16 +159,7 @@ export class ProductCarousel {
       });
     });
 
-    // Mobile rail cards click
-    if (this.mobileRail) {
-      this.mobileRail.addEventListener('click', e => {
-        const card = e.target.closest('.product-card');
-        if (!card) return;
-        const cardId = card.getAttribute('data-product-id');
-        const idx = this.products.findIndex(p => p.id === cardId);
-        if (idx !== -1) this.goTo(idx);
-      });
-    }
+
   }
 
   setupGestures() {
@@ -204,8 +172,6 @@ export class ProductCarousel {
 
     // Touch events for Mobile (HP)
     target.addEventListener('touchstart', e => {
-      // Don't hijack swipe if user is interacting with the mobile rail
-      if (e.target.closest('.mobile-cards-rail')) return;
       isTouch = true;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;

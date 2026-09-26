@@ -3,44 +3,14 @@
  */
 
 import { PRODUCTS } from './data/products.js';
-import { getIconSvg } from './domain/product-renderer.js';
 import { hapticAudio } from './domain/audio.js';
 import { ProductCarousel } from './domain/carousel.js';
 import { ModalController } from './domain/modal.js';
 import { MobileReelFeed } from './domain/mobile-feed.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Populate desktop cards with SVGs (if any legacy cards present)
-  const desktopCards = document.querySelectorAll('.cards-column .product-card');
-  desktopCards.forEach(card => {
-    const cardId = card.getAttribute('data-product-id');
-    const product = PRODUCTS.find(p => p.id === cardId);
-    if (!product) return;
-
-    const iconBox = card.querySelector('.card-icon-box');
-    if (iconBox) {
-      iconBox.innerHTML = getIconSvg(product.iconType);
-    }
-  });
-
-  // 2. Populate mobile swipe rail
-  const mobileRail = document.querySelector('.mobile-cards-rail');
-  if (mobileRail) {
-    mobileRail.innerHTML = PRODUCTS.map(
-      prod => `
-      <div class="product-card" data-product-id="${prod.id}" role="button" tabindex="0">
-        <div class="card-icon-box card-icon--${prod.iconType}">
-          ${getIconSvg(prod.iconType)}
-        </div>
-        <span class="card-title">${prod.name}</span>
-      </div>
-    `
-    ).join('');
-  }
-
-  // 3. Initialize carousel
+  // 1. Initialize carousel
   const laptopScreen = document.querySelector('#laptop-screen');
-  const infoPill = document.querySelector('.product-info-pill');
   const prevBtn = document.querySelector('#carousel-prev');
   const nextBtn = document.querySelector('#carousel-next');
   const dotsContainer = document.querySelector('#carousel-dots');
@@ -48,20 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const carousel = new ProductCarousel(PRODUCTS, {
     laptopScreen,
-    infoPill,
     prevBtn,
     nextBtn,
     dotsContainer,
-    stageWrapper,
-    cards: Array.from(desktopCards),
-    mobileRail
+    stageWrapper
   });
 
-  // 4. Initialize Modal & Bottom Sheet
+  // 2. Initialize Modal & Bottom Sheet
   const modalEl = document.querySelector('#product-modal');
   const modalController = new ModalController(modalEl);
 
-  // 4b. Initialize Mobile Full-Screen TikTok/Reels Feed (< 1024px)
+  // 3. Initialize Mobile Full-Screen TikTok/Reels Feed (<= 1024px)
   const mobileReelContainer = document.querySelector('#mobile-reel-feed');
   const reelDotsContainer = document.querySelector('#reel-dots-container');
 
@@ -94,23 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Trigger modal from interactive hint
-  const hintBtn = document.querySelector('.interactive-hint');
-  if (hintBtn) {
-    hintBtn.addEventListener('click', () => {
-      modalController.openDetail(carousel.getCurrentProduct());
-    });
-  }
-
-  // Trigger modal from info pill button
-  const pillActionBtn = document.querySelector('#pill-action-btn');
-  if (pillActionBtn) {
-    pillActionBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      modalController.openDetail(carousel.getCurrentProduct());
-    });
-  }
-
   // Trigger modal from header card title badge
   const headerBadgeBtn = document.querySelector('#header-product-badge');
   if (headerBadgeBtn) {
@@ -119,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Sound toggle in header
+  // 4. Sound toggle in header
   const soundBtn = document.querySelector('#sound-toggle-btn');
   if (soundBtn) {
     const updateSoundIcon = isEnabled => {
@@ -135,35 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Shuffle button in navbar pill (swaps to a random different product!)
-  const shuffleBtn = document.querySelector('#nav-shuffle-btn');
-  if (shuffleBtn) {
-    shuffleBtn.addEventListener('click', () => {
-      let randomIdx;
-      do {
-        randomIdx = Math.floor(Math.random() * PRODUCTS.length);
-      } while (randomIdx === carousel.currentIndex && PRODUCTS.length > 1);
-
-      carousel.goTo(randomIdx);
-    });
-  }
-
-  // 7. Cart action & badge animation
-  const cartBtn = document.querySelector('#nav-cart-btn');
-  const cartCountEl = document.querySelector('#cart-count');
-  let cartCount = 1;
-
+  // 5. Modal workspace action
   const modalAddCartBtn = document.querySelector('#modal-add-cart-btn');
   if (modalAddCartBtn) {
     modalAddCartBtn.addEventListener('click', () => {
-      cartCount += 1;
-      if (cartCountEl) {
-        cartCountEl.textContent = cartCount;
-        cartCountEl.style.transform = 'scale(1.4)';
-        setTimeout(() => {
-          cartCountEl.style.transform = 'scale(1)';
-        }, 200);
-      }
       hapticAudio.playChirp();
       modalController.close();
     });

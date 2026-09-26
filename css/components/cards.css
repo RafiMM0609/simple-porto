@@ -113,29 +113,6 @@
   text-align: center;
 }
 
-/* Mobile Rail Item Specifics */
-.mobile-cards-rail .product-card {
-  flex: 0 0 120px;
-  min-height: 110px;
-  padding: 0.7rem 0.6rem;
-  border-radius: var(--radius-lg);
-  scroll-snap-align: center;
-}
-
-.mobile-cards-rail .card-icon-box {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 0.35rem;
-}
-
-.mobile-cards-rail .card-icon-box svg {
-  width: 28px;
-  height: 28px;
-}
-
-.mobile-cards-rail .card-title {
-  font-size: 0.8rem;
-}
 
 /* ==========================================================================
    Mini Show Page (Desktop Flanking Preview Cards of Currently Active Product)
