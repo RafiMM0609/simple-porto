@@ -22,7 +22,8 @@ const CSS_FILES = [
   'components/controls.css',
   'components/info-pill.css',
   'components/modal.css',
-  'components/orbital.css'
+  'components/orbital.css',
+  'components/mobile-reel.css'
 ];
 
 test('CSS Files Existence and Non-Emptiness', () => {
@@ -444,6 +445,43 @@ test('Refined Hover Motion, Easing Tokens & Elegant Transition Coverage', () => 
 
   const laptopCss = fs.readFileSync(path.join(cssDir, 'components/laptop.css'), 'utf8');
   assert.ok(laptopCss.includes('--ease-hover'), 'laptop.css must utilize --ease-hover for laptop hover elevation');
+});
+
+test('Mobile Full Screen TikTok/Reels Showcase CSS Coverage', () => {
+  const reelCss = fs.readFileSync(path.join(cssDir, 'components/mobile-reel.css'), 'utf8');
+
+  // Verify full-screen 100dvh vertical scroll snap rules
+  assert.ok(reelCss.includes('scroll-snap-type: y mandatory'), 'mobile-reel.css must use scroll-snap-type: y mandatory');
+  assert.ok(reelCss.includes('100dvh'), 'mobile-reel.css must use 100dvh for dynamic viewport height');
+  assert.ok(reelCss.includes('scroll-snap-align: start'), 'mobile-reel.css must align slides to start');
+  assert.ok(reelCss.includes('scroll-snap-stop: always'), 'mobile-reel.css must specify scroll-snap-stop: always');
+  assert.ok(reelCss.includes('overscroll-behavior-y: contain'), 'mobile-reel.css must contain overscroll-behavior-y');
+  assert.ok(reelCss.includes('touch-action: pan-y'), 'mobile-reel.css must set touch-action: pan-y');
+  assert.ok(reelCss.includes('scrollbar-width: none'), 'mobile-reel.css must hide scrollbars');
+
+  // Verify all essential mobile reel component selectors
+  const requiredReelSelectors = [
+    '.mobile-reel-feed',
+    '.reel-slide',
+    '.reel-video-container',
+    '.reel-video',
+    '.reel-header',
+    '.reel-product-name',
+    '.reel-sound-btn',
+    '.reel-footer',
+    '.reel-tagline',
+    '.reel-explore-btn',
+    '.reel-dots-container',
+    '.reel-dot',
+    '.reel-dot.active'
+  ];
+
+  for (const selector of requiredReelSelectors) {
+    assert.ok(
+      reelCss.includes(selector),
+      `components/mobile-reel.css missing expected selector: ${selector}`
+    );
+  }
 });
 
 

@@ -7,6 +7,7 @@ import { getIconSvg } from './domain/product-renderer.js';
 import { hapticAudio } from './domain/audio.js';
 import { ProductCarousel } from './domain/carousel.js';
 import { ModalController } from './domain/modal.js';
+import { MobileReelFeed } from './domain/mobile-feed.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Populate desktop cards with SVGs (if any legacy cards present)
@@ -59,6 +60,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. Initialize Modal & Bottom Sheet
   const modalEl = document.querySelector('#product-modal');
   const modalController = new ModalController(modalEl);
+
+  // 4b. Initialize Mobile Full-Screen TikTok/Reels Feed (< 1024px)
+  const mobileReelContainer = document.querySelector('#mobile-reel-feed');
+  const reelDotsContainer = document.querySelector('#reel-dots-container');
+
+  const mobileFeed = new MobileReelFeed(PRODUCTS, {
+    container: mobileReelContainer,
+    dotsContainer: reelDotsContainer,
+    modalController,
+    hapticAudio
+  });
 
   // Click on any Desktop Mini Show Page to inspect WebM in full view
   const miniShowPages = document.querySelectorAll('.mini-show-page');

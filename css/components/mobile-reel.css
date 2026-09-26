@@ -1,0 +1,326 @@
+/* ==========================================================================
+   MOBILE FULL SCREEN TIKTOK / REELS PRODUCT SHOWCASE
+   Fulfills prompt specifications:
+   - Full screen 100dvh, vertical scroll-snap
+   - Satu produk = satu layar penuh
+   - Overscroll contain, touch-action: pan-y, zero horizontal scroll leak
+   - Header with bold product name & sound toggle (🔇/🔊)
+   - Center full-bleed WebM video with poster fallback
+   - Footer with 2-word tagline & high-contrast pill Explore button
+   - Fixed bottom 10-dots indicator
+   - Hidden on desktop (>= 1024px)
+   ========================================================================== */
+
+/* By default, hidden on desktop screens */
+.mobile-reel-feed {
+  display: none;
+}
+
+.reel-dots-container {
+  display: none;
+}
+
+/* Activate on mobile & tablet viewports (< 1024px) */
+@media (max-width: 1023px) {
+
+  /* Hide desktop showroom layout */
+  .app-container {
+    display: none !important;
+  }
+
+  /* Full screen vertical scroll feed container */
+  .mobile-reel-feed {
+    display: block;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    overscroll-behavior-y: contain;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    background-color: var(--theme-bg, #1B1512);
+    z-index: 25;
+    touch-action: pan-y;
+  }
+
+  .mobile-reel-feed::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Each full-screen product slide */
+  .reel-slide {
+    position: relative;
+    width: 100vw;
+    height: 100dvh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    touch-action: pan-y;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #0d0a08;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Center Media / Video Container */
+  .reel-video-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    background-color: #0b0807;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+
+  /* WebM Video Player */
+  .reel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    background-color: transparent;
+  }
+
+  /* Subtle Atmospheric Vignette Gradients for Contrast */
+  .reel-scrim-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: linear-gradient(180deg, rgba(10, 7, 6, 0.85) 0%, rgba(10, 7, 6, 0.45) 55%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .reel-scrim-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 220px;
+    background: linear-gradient(0deg, rgba(10, 7, 6, 0.92) 0%, rgba(10, 7, 6, 0.55) 60%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Slide Header (Top Overlay) */
+  .reel-header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(env(safe-area-inset-top, 16px) + 14px) 20px 12px;
+    pointer-events: none;
+  }
+
+  .reel-product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    pointer-events: auto;
+  }
+
+  .reel-product-name {
+    font-family: var(--font-sans);
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    margin: 0;
+  }
+
+  .reel-category-pill {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--theme-primary, #B8D97E);
+    opacity: 0.95;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Sound Toggle Button */
+  .reel-sound-btn {
+    pointer-events: auto;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    transition: transform var(--duration-fast) var(--ease-spring),
+                background-color 0.25s ease,
+                border-color 0.25s ease;
+  }
+
+  .reel-sound-btn:active {
+    transform: scale(0.9);
+  }
+
+  .reel-sound-btn.unmuted {
+    background: rgba(var(--theme-primary-rgb, 184, 217, 126), 0.28);
+    border-color: rgba(var(--theme-primary-rgb, 184, 217, 126), 0.55);
+    color: var(--theme-primary, #B8D97E);
+  }
+
+  /* Tap Video Play/Pause Indicator Overlay */
+  .reel-play-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    z-index: 8;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s var(--ease-spring);
+  }
+
+  .reel-play-indicator.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* Slide Footer (Bottom Overlay) */
+  .reel-footer {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 20px calc(env(safe-area-inset-bottom, 16px) + 38px);
+    pointer-events: none;
+  }
+
+  /* Footer Left: Max 2 Words Tagline */
+  .reel-footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 65%;
+    pointer-events: auto;
+  }
+
+  .reel-tagline {
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+    margin: 0;
+  }
+
+  .reel-version-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.65);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Footer Right: Pill-Shaped High-Contrast Explore Button */
+  .reel-explore-btn {
+    pointer-events: auto;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #16110e;
+    background: var(--theme-primary, #B8D97E);
+    border: none;
+    border-radius: var(--radius-full);
+    padding: 0.72rem 1.45rem;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45),
+                0 0 20px rgba(var(--theme-primary-rgb, 184, 217, 126), 0.35);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: transform var(--duration-fast) var(--ease-spring),
+                box-shadow 0.25s ease,
+                background-color 0.25s ease;
+  }
+
+  .reel-explore-btn:active {
+    transform: scale(0.94);
+  }
+
+  /* Fixed Bottom Dots Navigation (10 Dots) */
+  .reel-dots-container {
+    display: flex;
+    position: fixed;
+    bottom: calc(env(safe-area-inset-bottom, 12px) + 8px);
+    left: 0;
+    right: 0;
+    z-index: 35;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    pointer-events: auto;
+  }
+
+  .reel-dot {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    padding: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: width 0.3s var(--ease-spring),
+                height 0.3s var(--ease-spring),
+                background-color 0.25s ease,
+                border-radius 0.25s ease,
+                box-shadow 0.25s ease;
+  }
+
+  .reel-dot.active {
+    width: 20px;
+    height: 6px;
+    border-radius: 4px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 16px rgba(var(--theme-primary-rgb, 184, 217, 126), 0.5);
+  }
+}
