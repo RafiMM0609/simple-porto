@@ -1,67 +1,150 @@
 /* Photorealistic Laptop Device Container */
 .laptop-device {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: 100%;
   max-width: var(--laptop-max-width, 640px);
-  aspect-ratio: var(--laptop-aspect-ratio, 2070 / 1585);
+  aspect-ratio: var(--laptop-aspect-ratio, 2752 / 1536);
   z-index: 3;
-  margin: 0 auto;
+  margin: 0;
   user-select: none;
   cursor: pointer;
+  border-radius: var(--laptop-screen-radius, 10px 10px 4px 4px);
   transition: 
     transform var(--duration-hover) var(--ease-hover),
     filter var(--duration-hover) var(--ease-hover);
 }
 
 .laptop-device:hover {
-  transform: translateY(-5px) scale(1.012);
-  filter: drop-shadow(0 20px 42px var(--theme-glow-primary));
+  filter: 
+    drop-shadow(-14px 18px 28px rgba(var(--shadow-color-base), 0.45))
+    drop-shadow(0 20px 42px var(--theme-glow-primary));
 }
 
 .laptop-device:active {
   transform: translateY(-1px) scale(1.005);
 }
 
-/* High-Resolution Photorealistic Laptop Chassis Frame Image */
+/* Standalone Frame Image hidden on desktop since laptop is physically in background */
 .laptop-frame-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: fill;
-  display: block;
+  display: none !important;
   pointer-events: none;
   z-index: 5;
-  filter: drop-shadow(0 14px 28px rgba(10, 8, 6, 0.45));
+  filter: 
+    drop-shadow(-12px 12px 18px var(--shadow-laptop-near))
+    drop-shadow(-36px 26px 46px var(--shadow-laptop-diffuse));
+  transition: filter var(--duration-hover) var(--ease-hover);
+}
+
+.laptop-device:hover .laptop-frame-img {
+  filter: 
+    drop-shadow(-18px 16px 24px var(--shadow-laptop-near))
+    drop-shadow(-48px 36px 60px var(--shadow-laptop-diffuse));
 }
 
 /* The Screen Viewport (Where the product dashboard / video is displayed) */
 .laptop-screen {
   position: absolute;
-  top: var(--laptop-screen-top, 1.45%);
-  left: var(--laptop-screen-left, 9.13%);
-  width: var(--laptop-screen-width, 81.06%);
-  height: var(--laptop-screen-height, 66.18%);
-  background: #000000;
-  border-radius: var(--laptop-screen-radius, 12px 12px 0 0);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--laptop-screen-bg, #000000);
+  border-radius: var(--laptop-screen-radius, 10px 10px 4px 4px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   z-index: 2;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+  box-shadow: 
+    var(--laptop-screen-inner-glow, inset 0 0 30px rgba(255, 220, 150, 0.05)),
+    inset 0 0 10px rgba(0, 0, 0, 0.8),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
 }
 
-/* Screen Glass Reflection Sheen & Glare */
+/* Exact MacBook Camera Notch at top center */
+.laptop-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--laptop-notch-width, 10.78%);
+  height: var(--laptop-notch-height, 2.53%);
+  background: #08080a;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 
+    inset 0 -1px 1px rgba(255, 255, 255, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* 3.1 Refleksi Layar Laptop (DETAILS.md 3.1 & v1.3) */
+.laptop-screen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--laptop-screen-sheen, linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  ));
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* Screen Glass Reflection Sheen & Glare (Ray-Traced Glass Material) */
 .laptop-screen-glare {
   position: absolute;
-  top: var(--laptop-screen-top, 1.45%);
-  left: var(--laptop-screen-left, 9.13%);
-  width: var(--laptop-screen-width, 81.06%);
-  height: var(--laptop-screen-height, 66.18%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 6;
-  border-radius: var(--laptop-screen-radius, 12px 12px 0 0);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 42%, transparent 58%);
+  border-radius: var(--laptop-screen-radius, 10px 10px 4px 4px);
+  background: 
+    var(--laptop-screen-sheen, linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%, rgba(0, 0, 0, 0.05) 100%)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.02) 20%, transparent 40%),
+    radial-gradient(ellipse at 90% 18%, rgba(255, 245, 225, 0.16) 0%, transparent 55%),
+    linear-gradient(220deg, var(--sunlight-glare-warm) 0%, transparent 50%),
+    linear-gradient(180deg, transparent 72%, rgba(var(--shadow-color-base), 0.25) 100%);
+  box-shadow: 
+    inset 0 0 14px rgba(255, 255, 255, 0.05),
+    inset -1.5px 0 2px var(--sunlight-rim-color),
+    inset 1px 0 1.5px var(--cool-fill-rim),
+    inset 0 1px 1px rgba(255, 255, 255, 0.16);
+  overflow: hidden;
+}
+
+/* Faint horizontal blinds reflection slats on the upper-right corner */
+.laptop-screen-glare::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 48%;
+  height: 42%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.12) 0px,
+    rgba(255, 255, 255, 0.12) 3.5px,
+    transparent 3.5px,
+    transparent 13px
+  );
+  mask-image: radial-gradient(ellipse at 85% 20%, black 15%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 85% 20%, black 15%, transparent 75%);
+  opacity: 0.85;
+  pointer-events: none;
 }
 
 /* Laptop Top Lid / Display Bezel Fallback */
@@ -286,6 +369,12 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  filter: var(--laptop-content-filter, sepia(0.05) brightness(0.95));
+}
+
+.laptop-screen video,
+.laptop-screen img {
+  filter: var(--laptop-content-filter, sepia(0.05) brightness(0.95));
 }
 
 .screen-video-overlay {

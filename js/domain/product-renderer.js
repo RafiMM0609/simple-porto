@@ -249,14 +249,6 @@ export function renderMiniPageHtml(product, viewTitle, urlSlug, nodeLabel = '') 
 
   return `
     ${badgeHtml}
-    <div class="mini-page-header">
-      <div class="mini-window-dots">
-        <span class="dot dot--red"></span>
-        <span class="dot dot--yellow"></span>
-        <span class="dot dot--green"></span>
-      </div>
-      <span class="mini-page-url">productzero.io/${product.id}/${urlSlug}</span>
-    </div>
     <div class="mini-page-video-body">
       <div class="mini-video-frame">
         <video 

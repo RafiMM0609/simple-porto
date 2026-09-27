@@ -16,23 +16,28 @@
   z-index: 20;
 }
 
-/* Center Header Card Title Badge (Replaces Center Floating Pill Navbar) */
+/* Center Header Card Title Badge (DETAILS.md Section 6 - v1.2) */
+.project-title,
 .header-product-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  background: rgba(var(--theme-card-rgb), 0.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--theme-border-subtle);
-  border-radius: var(--radius-full);
-  padding: 0.4rem 1.15rem;
-  box-shadow: var(--shadow-sm);
+  gap: 0.65rem;
+  background: var(--header-badge-bg, rgba(0, 0, 0, 0.3));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: var(--header-badge-border, 1px solid rgba(255, 255, 255, 0.1));
+  border-radius: var(--project-title-radius, 8px);
+  padding: var(--project-title-padding, 8px 16px);
+  box-shadow: 
+    -2px 3px 8px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(255, 220, 150, 0.1);
   position: absolute;
+  top: 14px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
   cursor: pointer;
+  color: var(--project-title-color, #ffffff);
   transition: 
     transform var(--duration-hover) var(--ease-hover),
     background-color 0.35s var(--ease-smooth),
@@ -41,37 +46,42 @@
   user-select: none;
 }
 
+.project-title:hover,
 .header-product-badge:hover {
-  background: rgba(var(--theme-card-rgb), 0.72);
-  border-color: rgba(var(--theme-mint-rgb), 0.22);
-  box-shadow: var(--shadow-md);
-  transform: translateX(-50%) translateY(-2px);
+  background: rgba(0, 0, 0, 0.45);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 
+    -3px 5px 12px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(255, 220, 150, 0.16);
+  transform: translateX(-50%) translateY(-1.5px);
 }
 
+.project-title:active,
 .header-product-badge:active {
-  transform: translateX(-50%) scale(0.96);
+  transform: translateX(-50%) scale(0.97);
 }
 
 .header-product-badge .card-title,
 .header-card-title {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--theme-text);
-  letter-spacing: -0.02em;
+  color: #ffffff;
+  letter-spacing: -0.015em;
   line-height: 1;
+  text-shadow: var(--header-badge-text-shadow, -2px 3px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 220, 150, 0.1));
 }
 
 .header-card-badge {
   font-family: var(--font-mono, monospace);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  color: var(--theme-text-muted);
-  background: rgba(var(--theme-mint-rgb), 0.08);
-  padding: 0.16rem 0.48rem;
-  border-radius: var(--radius-full);
-  border: 1px solid rgba(var(--theme-mint-rgb), 0.16);
-  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.18rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  letter-spacing: 0.03em;
   line-height: 1;
 }
 
@@ -151,20 +161,26 @@
   box-shadow: 0 2px 8px rgba(var(--theme-accent-rgb), 0.45);
 }
 
-/* Sound / Haptic / Location Action Button on Right */
+/* Sound / Haptic / Day-Night Action Button on Right (DETAILS.md Section 8 - v1.2) */
+.mode-toggle,
 .header-action-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
+  min-width: 42px;
   height: 42px;
-  border-radius: var(--radius-sm);
-  background: rgba(var(--theme-card-rgb), 0.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--theme-border-subtle);
-  color: var(--theme-text-muted);
-  box-shadow: var(--shadow-sm);
+  padding: var(--mode-toggle-padding, 8px 12px);
+  border-radius: var(--mode-toggle-radius, 12px);
+  background: var(--mode-toggle-bg, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: var(--mode-toggle-border, 1px solid rgba(255, 255, 255, 0.2));
+  color: #ffffff;
+  box-shadow: var(--mode-toggle-shadow, 
+    -3px 4px 10px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(255, 220, 150, 0.1)
+  );
+  cursor: pointer;
   transition: 
     transform var(--duration-hover) var(--ease-hover),
     background-color 0.35s var(--ease-smooth),
@@ -173,13 +189,18 @@
     box-shadow var(--duration-hover) var(--ease-hover);
 }
 
+.mode-toggle:hover,
 .header-action-btn:hover {
-  color: var(--theme-text);
-  background: rgba(var(--theme-card-rgb), 0.75);
-  border-color: rgba(var(--theme-mint-rgb), 0.22);
-  transform: scale(1.04);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    -4px 6px 14px rgba(0, 0, 0, 0.4),
+    0 0 22px rgba(255, 220, 150, 0.2);
+  transform: translateY(-1px) scale(1.05);
 }
 
+.mode-toggle:active,
 .header-action-btn:active {
   transform: scale(0.94);
 }

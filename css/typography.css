@@ -1,35 +1,68 @@
-/* Brand Logo */
+/* Brand Logo & Brand Badge — DETAILS.md Section 7 (v1.2) */
+.brand-badge,
 .brand-logo {
   font-family: var(--font-sans);
-  font-size: 1.75rem;
+  font-size: 1.55rem;
   font-weight: 800;
   letter-spacing: -0.04em;
-  color: var(--cream-text);
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
   text-transform: lowercase;
+  position: fixed;
+  top: var(--brand-badge-top, 24px);
+  left: var(--brand-badge-left, 24px);
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: var(--brand-badge-bg, rgba(0, 0, 0, 0.2));
+  border: var(--brand-badge-border, 1px solid rgba(255, 255, 255, 0.1));
+  border-radius: var(--brand-badge-radius, 8px);
+  padding: var(--brand-badge-padding, 8px 16px);
+  filter: var(--brand-badge-shadow, drop-shadow(-2px 3px 6px rgba(0, 0, 0, 0.5)));
+  text-shadow: -1px 2px 4px rgba(0, 0, 0, 0.5);
   transition: 
     opacity 0.35s var(--ease-smooth),
+    filter 0.35s var(--ease-smooth),
+    background-color 0.35s var(--ease-smooth),
+    border-color 0.35s var(--ease-smooth),
     transform var(--duration-hover) var(--ease-hover);
 }
 
+.brand-badge:hover,
 .brand-logo:hover {
-  opacity: 0.88;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.2);
+  filter: drop-shadow(-3px 4px 8px rgba(0, 0, 0, 0.65));
   transform: translateY(-1px);
 }
 
-/* Display Title */
+/* Display Title — DETAILS.md Section 4 (v1.3) */
 .section-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 3.8vw, 3.2rem);
+  font-size: clamp(1.05rem, 1.8vw, 1.45rem);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  color: var(--cream-text);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--section-title-color, #ffffff);
   text-align: center;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  margin-top: 0.5rem;
+  text-shadow: var(--section-title-shadow, 
+    -2px 3px 8px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 220, 150, 0.1)
+  );
+  background: var(--section-title-bg, rgba(0, 0, 0, 0.3));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: var(--section-title-padding, 8px 16px);
+  border-radius: var(--section-title-radius, 8px);
+  border: var(--section-title-border, 1px solid rgba(255, 255, 255, 0.1));
+  margin: 0;
+  transition: 
+    background-color 0.35s var(--ease-smooth),
+    border-color 0.35s var(--ease-smooth),
+    box-shadow 0.35s var(--ease-smooth);
 }
 
 /* Micro Details Hint */

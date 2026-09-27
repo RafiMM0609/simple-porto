@@ -1,53 +1,70 @@
-/* Carousel Curved Arrow Buttons (Left & Right) */
+/* Carousel Curved Arrow Buttons (Left & Right — DETAILS.md Section 2 - v1.3) */
+.arrow-button,
 .carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+  width: var(--arrow-btn-width, 48px);
+  height: var(--arrow-btn-height, 48px);
+  border-radius: var(--arrow-btn-radius, 50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(var(--theme-card-rgb), 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1.5px solid var(--theme-border);
-  color: var(--theme-text);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  background: var(--arrow-btn-bg, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: var(--arrow-btn-border, 1px solid rgba(255, 255, 255, 0.2));
+  color: #ffffff;
+  box-shadow: var(--arrow-btn-shadow, 
+    -4px 6px 12px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(255, 220, 150, 0.1)
+  );
   cursor: pointer;
   z-index: 15;
-  transition: 
-    transform var(--duration-hover) var(--ease-hover),
-    background-color 0.35s var(--ease-smooth),
-    border-color 0.35s var(--ease-smooth),
-    color 0.25s ease,
-    box-shadow var(--duration-hover) var(--ease-hover);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Warm Sunlight Highlight on Right Edge of Arrow Buttons (v1.3) */
+.arrow-button::before,
+.carousel-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  height: 100%;
+  border-radius: 0 50% 50% 0;
+  background: var(--arrow-btn-rim-highlight, linear-gradient(to left, rgba(255, 220, 150, 0.15), transparent));
+  pointer-events: none;
 }
 
 .carousel-btn--prev {
-  left: -20px;
+  left: -58px;
 }
 
 .carousel-btn--next {
-  right: -20px;
+  right: -58px;
 }
 
+.arrow-button svg,
 .carousel-btn svg {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   stroke: currentColor;
-  stroke-width: 1.8;
+  stroke-width: 2;
   fill: none;
   transition: transform var(--duration-hover) var(--ease-hover);
 }
 
+.arrow-button:hover,
 .carousel-btn:hover {
-  background: var(--theme-card-hover);
-  border-color: var(--theme-primary);
-  color: #ffffff;
-  transform: translateY(-50%) scale(1.06);
-  box-shadow: 0 0 22px var(--theme-glow-primary);
+  background: var(--arrow-btn-bg-hover, rgba(255, 255, 255, 0.2));
+  box-shadow: var(--arrow-btn-shadow-hover, 
+    -6px 8px 16px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(255, 220, 150, 0.2)
+  );
+  transform: translateY(-50%) scale(1.1);
 }
 
 .carousel-btn--prev:hover svg {
@@ -58,6 +75,7 @@
   transform: translateX(3px);
 }
 
+.arrow-button:active,
 .carousel-btn:active {
   transform: translateY(-50%) scale(0.94);
 }

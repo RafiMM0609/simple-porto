@@ -1,88 +1,160 @@
-/* App Container & Background Environment */
+/* App Container & Background Environment — Strict Full-Screen Viewport */
 .app-container {
-  min-height: 100vh;
-  min-height: 100dvh;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem 2rem 1.5rem;
-  max-width: var(--max-width);
-  margin: 0 auto;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  overflow: hidden;
   position: relative;
   z-index: 1;
+  pointer-events: none;
 }
 
-/* Atmospheric Studio Desk Background Effect */
+/* Atmospheric Studio Desk Background Effect with 50mm f/2.8 Depth of Field Bokeh */
 .ambient-background {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background-image: 
-    linear-gradient(180deg, rgba(20, 15, 12, 0.38) 0%, rgba(20, 15, 12, 0.12) 40%, rgba(20, 15, 12, 0.52) 100%),
+    linear-gradient(180deg, rgba(20, 15, 12, 0.32) 0%, rgba(20, 15, 12, 0.08) 38%, rgba(20, 15, 12, 0.46) 100%),
     url('../assets/studio-desk-bg.jpg');
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
+  filter: blur(2px) saturate(1.06) contrast(1.03); /* Cinematic shallow depth of field */
   overflow: hidden;
 }
 
-/* Subtle Natural Sunlight & Window Blinds Shadows */
+/* Subtle Natural Sunlight, Volumetric God Rays & Window Blinds Shadows */
 .ambient-circuits {
   position: absolute;
   inset: 0;
-  opacity: 0.18;
+  opacity: 0.25;
   background-image: 
-    radial-gradient(ellipse at 80% 20%, rgba(255, 235, 195, 0.4) 0%, transparent 60%),
+    /* Corner vignette (10% intensity) to draw focus to center-frame laptop */
+    radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(12, 10, 8, 0.45) 100%),
+    /* Volumetric God Rays streaming diagonally from window (top-right) */
+    linear-gradient(
+      -36deg,
+      transparent 0%,
+      transparent 45%,
+      rgba(255, 240, 205, 0.12) 52%,
+      transparent 58%,
+      rgba(255, 235, 195, 0.16) 65%,
+      transparent 73%,
+      rgba(255, 245, 215, 0.10) 82%,
+      transparent 90%
+    ),
+    /* Primary Warm Sunlight Beam from Window (Right Side, 4500K-5000K) */
+    radial-gradient(ellipse at 86% 18%, rgba(255, 226, 178, 0.62) 0%, rgba(255, 196, 134, 0.24) 42%, transparent 74%),
+    /* Secondary Cool Ambient Bounce Light from Left (6500K) */
+    radial-gradient(ellipse at 12% 42%, rgba(145, 185, 255, 0.16) 0%, transparent 58%),
+    /* Blinds shadow slats cast in dark cool blue-purple */
     repeating-linear-gradient(
       -18deg,
-      rgba(0, 0, 0, 0.12) 0px,
-      rgba(0, 0, 0, 0.12) 20px,
-      transparent 20px,
-      transparent 46px
+      rgba(var(--shadow-color-base), 0.18) 0px,
+      rgba(var(--shadow-color-base), 0.18) 22px,
+      transparent 22px,
+      transparent 50px
     );
   pointer-events: none;
 }
 
-/* Header Grid / Bar */
+/* Header Grid / Bar — Floating Flush Overlay */
 .site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
-  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
+  padding: 1rem 2rem;
+  z-index: 20;
+  pointer-events: none;
 }
 
-/* Main Product Showcase Arena */
-.showcase-stage {
-  flex: 1;
+.site-header > * {
+  pointer-events: auto;
+}
+
+.header-actions {
+  margin-left: auto;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 25;
+}
+
+/* Main Product Showcase Arena — Edge-to-Edge Full Viewport */
+.showcase-stage {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  width: 100%;
-  margin: 0.5rem 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: auto;
 }
 
-/* Showcase Grid Layout */
+/* Showcase Grid Layout — Calibrated Photorealistic Studio Desk Canvas Edge-to-Edge */
 .showcase-grid {
-  display: grid;
-  grid-template-columns: minmax(210px, 260px) 1fr minmax(210px, 260px);
-  align-items: center;
-  justify-items: center;
-  width: 100%;
-  max-width: 1300px;
-  position: relative;
-  gap: 1.25rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(100vw, calc(100vh * (2752 / 1536)));
+  height: max(100vh, calc(100vw / (2752 / 1536)));
+  aspect-ratio: 2752 / 1536;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+  background-image: 
+    linear-gradient(180deg, var(--overlay-active, transparent) 0%, var(--overlay-active, transparent) 100%),
+    url('../assets/studio-desk-bg.jpeg'),
+    url('../assets/studio-desk-bg.jpg');
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: filter var(--duration-transition-mode) var(--ease-smooth);
+  filter: brightness(var(--brightness-active, 1.0));
+}
+
+/* Night Mode Overlay Layer on Canvas */
+.showcase-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--overlay-active, transparent);
+  pointer-events: none;
+  z-index: 2;
+  transition: background-color var(--duration-transition-mode) var(--ease-smooth);
 }
 
 /* Flanking Card Columns (Desktop) */
 .cards-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
   z-index: 5;
 }
 
@@ -94,25 +166,37 @@
   align-items: flex-start;
 }
 
-/* Center Laptop Podium */
+/* Center Laptop Screen Podium Overlay */
 .podium-center {
+  position: absolute;
+  top: var(--laptop-screen-top);
+  left: var(--laptop-screen-left);
+  width: var(--laptop-screen-width);
+  height: var(--laptop-screen-height);
+  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  width: 100%;
-  max-width: 680px;
-  z-index: 4;
 }
 
-/* Section Footer */
+/* Section Footer — Floating Flush Bottom Overlay */
 .site-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  z-index: 10;
-  gap: 0.5rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 0.4rem 1.5rem 0.85rem;
+  z-index: 20;
+  gap: 0.35rem;
+  pointer-events: none;
+}
+
+.site-footer > * {
+  pointer-events: auto;
 }
 
 /* Category Filter Tags */
@@ -125,37 +209,45 @@
   margin-top: 0.25rem;
 }
 
+.tag,
 .filter-tag-btn {
   font-size: 0.78rem;
   font-weight: 500;
-  padding: 0.32rem 0.85rem;
-  border-radius: var(--radius-full);
-  background: rgba(var(--theme-card-rgb), 0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--theme-border-subtle);
-  color: var(--cream-text-muted);
-  box-shadow: var(--shadow-sm);
+  padding: var(--tag-padding, 6px 12px);
+  border-radius: var(--tag-radius, 6px);
+  background: var(--tag-bg, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: var(--tag-border, 1px solid rgba(255, 255, 255, 0.15));
+  color: var(--tag-color, #ffffff);
+  box-shadow: var(--tag-shadow, 
+    -2px 3px 8px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(255, 220, 150, 0.05)
+  );
+  cursor: pointer;
   transition: 
     background-color 0.35s var(--ease-smooth),
     border-color 0.35s var(--ease-smooth),
     color 0.25s ease,
     transform var(--duration-hover) var(--ease-hover),
-    box-shadow 0.35s ease;
+    box-shadow var(--duration-hover) var(--ease-hover);
 }
 
+.tag:hover,
 .filter-tag-btn:hover {
-  background: rgba(var(--theme-card-rgb), 0.55);
-  border-color: var(--theme-border-subtle-hover);
-  color: var(--theme-text);
+  background: var(--tag-bg-hover, rgba(255, 255, 255, 0.18));
+  border-color: var(--tag-border-hover, rgba(255, 255, 255, 0.28));
+  color: #ffffff;
   transform: translateY(-1.5px);
+  box-shadow: -3px 4px 10px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 220, 150, 0.12);
 }
 
+.tag.active,
 .filter-tag-btn.active {
-  background: rgba(var(--theme-mint-rgb), 0.08);
-  border-color: rgba(var(--theme-mint-rgb), 0.25);
-  color: var(--theme-text);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  box-shadow: -2px 3px 8px rgba(0, 0, 0, 0.35), 0 0 18px rgba(255, 220, 150, 0.15);
 }
 
 /* Mobile & Tablet Adaptations */
@@ -189,15 +281,37 @@
 
 /* Height-Constrained Adaptations (e.g. 768px laptop screens) */
 @media (max-height: 820px) {
-  .app-container {
-    padding: 0.5rem 1.25rem 0.75rem;
+  @media (max-width: 1024px) {
+    .app-container {
+      padding: 0.5rem 1.25rem 0.75rem;
+    }
+
+    .showcase-stage {
+      margin: 0.2rem 0;
+    }
+
+    .cards-column {
+      gap: 1.5rem;
+    }
   }
 
-  .showcase-stage {
-    margin: 0.2rem 0;
-  }
+  @media (min-width: 1025px) {
+    .site-header {
+      padding: 0.6rem 2rem;
+    }
 
-  .cards-column {
-    gap: 1.5rem;
+    .site-footer {
+      padding: 0.25rem 1.5rem 0.55rem;
+      gap: 0.25rem;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+    }
+
+    .filter-tag-btn {
+      font-size: 0.72rem;
+      padding: 0.24rem 0.68rem;
+    }
   }
 }

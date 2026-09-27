@@ -487,9 +487,94 @@ test('Mobile Full Screen TikTok/Reels Showcase CSS Coverage', () => {
   }
 });
 
+test('Realistic Contact Shadow, Directional Cast Shadow & Window Lighting Coverage', () => {
+  const varsContent = fs.readFileSync(path.join(cssDir, 'variables.css'), 'utf8');
+  assert.ok(varsContent.includes('--shadow-contact-color'), 'variables.css must define --shadow-contact-color');
+  assert.ok(varsContent.includes('--shadow-cast-root'), 'variables.css must define --shadow-cast-root');
+  assert.ok(varsContent.includes('--shadow-directional-card'), 'variables.css must define --shadow-directional-card');
+  assert.ok(varsContent.includes('--sunlight-rim-color'), 'variables.css must define --sunlight-rim-color');
+  assert.ok(varsContent.includes('--cool-screen-glow'), 'variables.css must define --cool-screen-glow');
+  assert.ok(varsContent.includes('--card-navy-surface'), 'variables.css must define --card-navy-surface');
+  assert.ok(varsContent.includes('--shadow-card-top'), 'variables.css must define --shadow-card-top');
+  assert.ok(varsContent.includes('--shadow-card-bottom'), 'variables.css must define --shadow-card-bottom');
 
+  const stageCss = fs.readFileSync(path.join(cssDir, 'components/stage.css'), 'utf8');
+  assert.ok(stageCss.includes('.laptop-contact-shadow'), 'stage.css must define .laptop-contact-shadow');
+  assert.ok(stageCss.includes('.laptop-contact-shadow::before'), 'stage.css must define .laptop-contact-shadow::before for sharp occlusion seam');
+  assert.ok(stageCss.includes('.laptop-cast-shadow'), 'stage.css must define .laptop-cast-shadow for directional projection');
+  assert.ok(stageCss.includes('skewX'), 'stage.css .laptop-cast-shadow must use perspective skew for realistic desk projection');
+  assert.ok(stageCss.includes('.laptop-screen-desk-glow'), 'stage.css must define .laptop-screen-desk-glow for screen emission');
+  assert.ok(stageCss.includes('.laptop-screen-desk-glow::before'), 'stage.css must define volumetric air haze scattering');
 
+  const laptopCss = fs.readFileSync(path.join(cssDir, 'components/laptop.css'), 'utf8');
+  assert.ok(laptopCss.includes('--shadow-laptop-near'), 'laptop.css must utilize directional drop-shadow token');
+  assert.ok(laptopCss.includes('.laptop-screen-glare'), 'laptop.css must define .laptop-screen-glare with sunlight angle');
+  assert.ok(laptopCss.includes('.laptop-screen-glare::before'), 'laptop.css must define blinds reflection slats on glass');
 
+  const cardsCss = fs.readFileSync(path.join(cssDir, 'components/cards.css'), 'utf8');
+  assert.ok(cardsCss.includes('--shadow-directional-card'), 'cards.css must utilize --shadow-directional-card for directional depth');
+  assert.ok(cardsCss.includes('.orbital-node--1 .mini-show-page'), 'cards.css must configure specific top-left card shadow');
+  assert.ok(cardsCss.includes('.orbital-node--3 .mini-show-page'), 'cards.css must configure specific top-right card shadow');
+  assert.ok(cardsCss.includes('.orbital-node--2 .mini-show-page'), 'cards.css must configure specific bottom-left card shadow');
+  assert.ok(cardsCss.includes('.orbital-node--4 .mini-show-page'), 'cards.css must configure specific bottom-right card shadow');
 
+  const layoutCss = fs.readFileSync(path.join(cssDir, 'layout.css'), 'utf8');
+  assert.ok(layoutCss.includes('filter: blur'), 'layout.css must configure shallow depth-of-field blur on ambient-background');
+  assert.ok(layoutCss.includes('linear-gradient(') && layoutCss.includes('-36deg'), 'layout.css must configure volumetric god rays');
+});
 
+test('DETAILS.md v1.5 Visual Refinements & Spec Compliance', () => {
+  const varsContent = fs.readFileSync(path.join(cssDir, 'variables.css'), 'utf8');
+  const cardsCss = fs.readFileSync(path.join(cssDir, 'components/cards.css'), 'utf8');
+  const controlsCss = fs.readFileSync(path.join(cssDir, 'components/controls.css'), 'utf8');
+  const laptopCss = fs.readFileSync(path.join(cssDir, 'components/laptop.css'), 'utf8');
+  const navbarCss = fs.readFileSync(path.join(cssDir, 'components/navbar.css'), 'utf8');
+  const typoCss = fs.readFileSync(path.join(cssDir, 'typography.css'), 'utf8');
+  const layoutCss = fs.readFileSync(path.join(cssDir, 'layout.css'), 'utf8');
+  const orbitalCss = fs.readFileSync(path.join(cssDir, 'components/orbital.css'), 'utf8');
 
+  // 1. Mini Page Tokens & Selectors (v1.4 / v1.5)
+  assert.ok(varsContent.includes('--minipage-border'), 'variables.css must define --minipage-border');
+  assert.ok(varsContent.includes('--minipage-radius'), 'variables.css must define --minipage-radius');
+  assert.ok(varsContent.includes('--minipage-shadow'), 'variables.css must define --minipage-shadow');
+  assert.ok(varsContent.includes('--minipage-bg'), 'variables.css must define --minipage-bg');
+  assert.ok(varsContent.includes('--minipage-rim-highlight'), 'variables.css must define --minipage-rim-highlight');
+  assert.ok(varsContent.includes('--minipage-filter'), 'variables.css must define --minipage-filter');
+  assert.ok(cardsCss.includes('.mini-page'), 'cards.css must support .mini-page selector');
+  assert.ok(cardsCss.includes('inset 0 0 0 1px rgba(255, 255, 255, 0.05)'), 'cards.css must include subtle inner shadow for thinness');
+  assert.ok(cardsCss.includes('display: none !important'), 'cards.css must hide browser frame elements');
+
+  // 1.8 Mini Page 1 position offset to clear bookshelf
+  assert.ok(varsContent.includes('--minipage-1-left: 11.5%') || varsContent.includes('--minipage-1-left'), 'variables.css must position mini-page 1 clear of left bookshelf');
+
+  // 2. Arrow Button Tokens & Selectors (v1.3)
+  assert.ok(varsContent.includes('--arrow-btn-shadow'), 'variables.css must define --arrow-btn-shadow');
+  assert.ok(controlsCss.includes('.arrow-button'), 'controls.css must support .arrow-button selector');
+  assert.ok(controlsCss.includes('backdrop-filter: blur(10px)'), 'controls.css .arrow-button must have backdrop-filter blur(10px)');
+
+  // 3. Laptop Screen Refinement (v1.3)
+  assert.ok(laptopCss.includes('.laptop-screen::after'), 'laptop.css must define reflection sheen on .laptop-screen::after');
+  assert.ok(varsContent.includes('--laptop-screen-sheen'), 'variables.css must define --laptop-screen-sheen token');
+  assert.ok(varsContent.includes('--laptop-screen-inner-glow'), 'variables.css must define --laptop-screen-inner-glow token');
+  assert.ok(varsContent.includes('--laptop-content-filter'), 'variables.css must define --laptop-content-filter token');
+
+  // 4. Section Title Refinement (v1.3)
+  assert.ok(varsContent.includes('--section-title-shadow'), 'variables.css must define --section-title-shadow');
+  assert.ok(typoCss.includes('.section-title') && typoCss.includes('backdrop-filter: blur(10px)'), 'typography.css must style .section-title with backdrop-filter blur(10px)');
+
+  // 5. Category Tags Refinement (v1.3)
+  assert.ok(varsContent.includes('--tag-shadow'), 'variables.css must define --tag-shadow');
+  assert.ok(layoutCss.includes('.tag') && layoutCss.includes('backdrop-filter: blur(10px)'), 'layout.css must style .tag with backdrop-filter blur(10px)');
+
+  // 6. Project Title Refinement (v1.2)
+  assert.ok(navbarCss.includes('.project-title'), 'navbar.css must support .project-title selector');
+  assert.ok(varsContent.includes('--project-title-shadow'), 'variables.css must define --project-title-shadow');
+
+  // 7. Brand Badge Refinement (v1.2)
+  assert.ok(typoCss.includes('.brand-badge'), 'typography.css must support .brand-badge selector');
+  assert.ok(varsContent.includes('--brand-badge-shadow'), 'variables.css must define --brand-badge-shadow');
+
+  // 8. Mode Toggle Refinement (v1.2)
+  assert.ok(navbarCss.includes('.mode-toggle'), 'navbar.css must support .mode-toggle selector');
+  assert.ok(varsContent.includes('--mode-toggle-shadow'), 'variables.css must define --mode-toggle-shadow');
+});

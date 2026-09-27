@@ -7,4 +7,5 @@
 - Dont ever build god tier complex files or function
 - Always separate by domain or function
 - port yang dipake 3210
-- Sistem warna terpusat ke dalam variabel CSS di variables.css
+- Sistem warna duration dan lain lain terpusat ke dalam variabel CSS di variables.css
+- Gunakan easing untuk animasi hover dan animasi lainya (elegan)

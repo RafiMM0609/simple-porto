@@ -72,11 +72,15 @@
 
 /* Common Node Properties */
 .orbital-node {
-  position: relative;
+  position: absolute;
   width: 250px;
   z-index: 5;
-  will-change: transform;
-  transition: z-index var(--duration-hover) var(--ease-hover);
+  pointer-events: auto;
+  will-change: transform, filter;
+  transition: 
+    transform var(--duration-hover) var(--ease-hover),
+    filter var(--duration-hover) var(--ease-hover),
+    z-index var(--duration-hover) var(--ease-hover);
 }
 
 /* Orbital Node Floating Status Badge */
@@ -124,98 +128,86 @@
 }
 
 /* --------------------------------------------------------------------------
-   Node 1 (Alpha / Upper-Left Outer Orbit):
-   Terangkat tinggi ke atas dan sedikit menjauh ke kiri dengan kemiringan halus
+   Node 1 (Alpha / Kiri Depan): Paling dekat, paling besar, tajam
    -------------------------------------------------------------------------- */
 .orbital-node--1 {
-  align-self: flex-end;
-  margin-right: 1.25rem;
-  margin-bottom: 0.5rem;
-  transform: translate3d(-16px, -24px, 0) rotate(-1.5deg);
+  top: var(--minipage-1-top, 26%);
+  left: var(--minipage-1-left, 11.5%);
+  transform: var(--minipage-left-perspective, perspective(1000px) rotateY(5deg)) scale(var(--minipage-1-scale, 0.90)) rotate(var(--minipage-1-rotate, -1.2deg));
+  filter: blur(var(--minipage-1-blur, 0px));
+  z-index: var(--minipage-1-z, 6);
   animation: orbit-levitate-1 7.2s ease-in-out infinite alternate;
 }
 
 @keyframes orbit-levitate-1 {
   0% {
-    transform: translate3d(-16px, -24px, 0) rotate(-1.5deg);
-  }
-  50% {
-    transform: translate3d(-10px, -34px, 0) rotate(-0.5deg);
+    transform: var(--minipage-left-perspective, perspective(1000px) rotateY(5deg)) scale(var(--minipage-1-scale, 0.90)) rotate(var(--minipage-1-rotate, -1.2deg)) translateY(0px);
   }
   100% {
-    transform: translate3d(-22px, -16px, 0) rotate(-2deg);
+    transform: var(--minipage-left-perspective, perspective(1000px) rotateY(5deg)) scale(var(--minipage-1-scale, 0.90)) rotate(var(--minipage-1-rotate, -1.2deg)) translateY(-8px);
   }
 }
 
 /* --------------------------------------------------------------------------
-   Node 2 (Beta / Lower-Left Inner Orbit):
-   Menjorok masuk mendekati pedestal laptop di kiri bawah
+   Node 2 (Beta / Kiri Belakang): Lebih kecil, melayang di atas buku, soft blur
    -------------------------------------------------------------------------- */
 .orbital-node--2 {
-  align-self: flex-start;
-  margin-left: 2rem;
-  margin-top: 0.75rem;
-  transform: translate3d(28px, 14px, 0) rotate(1.2deg);
+  top: var(--minipage-2-top, 13%);
+  left: var(--minipage-2-left, 16%);
+  transform: var(--minipage-left-perspective, perspective(1000px) rotateY(5deg)) scale(var(--minipage-2-scale, 0.85)) rotate(var(--minipage-2-rotate, 1.2deg));
+  filter: blur(var(--minipage-2-blur, 1.2px));
+  z-index: var(--minipage-2-z, 5);
   animation: orbit-levitate-2 6.5s ease-in-out infinite alternate 0.9s;
 }
 
 @keyframes orbit-levitate-2 {
   0% {
-    transform: translate3d(28px, 14px, 0) rotate(1.2deg);
-  }
-  50% {
-    transform: translate3d(20px, 24px, 0) rotate(2deg);
+    transform: var(--minipage-left-perspective, perspective(1000px) rotateY(5deg)) scale(var(--minipage-2-scale, 0.85)) rotate(var(--minipage-2-rotate, 1.2deg)) translateY(0px);
   }
   100% {
-    transform: translate3d(34px, 6px, 0) rotate(0.4deg);
+    transform: var(--minipage-left-perspective, perspective(1000px) rotateY(5deg)) scale(var(--minipage-2-scale, 0.85)) rotate(var(--minipage-2-rotate, 1.2deg)) translateY(-7px);
   }
 }
 
 /* --------------------------------------------------------------------------
-   Node 3 (Gamma / Upper-Right Near Orbit):
-   Berada tinggi dekat sudut atas kanan laptop screen
+   Node 3 (Gamma / Kanan Depan): Ukuran sedang, dekat jendela, tajam
    -------------------------------------------------------------------------- */
 .orbital-node--3 {
-  align-self: flex-start;
-  margin-left: -0.85rem;
-  margin-bottom: 0.5rem;
-  transform: translate3d(-22px, -32px, 0) rotate(1.4deg);
+  top: var(--minipage-3-top, 24%);
+  left: var(--minipage-3-left, 74%);
+  transform: var(--minipage-right-perspective, perspective(1000px) rotateY(-5deg)) scale(var(--minipage-3-scale, 0.92)) rotate(var(--minipage-3-rotate, 1.4deg));
+  filter: blur(var(--minipage-3-blur, 0px));
+  z-index: var(--minipage-3-z, 6);
   animation: orbit-levitate-3 8s ease-in-out infinite alternate 1.8s;
 }
 
 @keyframes orbit-levitate-3 {
   0% {
-    transform: translate3d(-22px, -32px, 0) rotate(1.4deg);
-  }
-  50% {
-    transform: translate3d(-30px, -20px, 0) rotate(0.5deg);
+    transform: var(--minipage-right-perspective, perspective(1000px) rotateY(-5deg)) scale(var(--minipage-3-scale, 0.92)) rotate(var(--minipage-3-rotate, 1.4deg)) translateY(0px);
   }
   100% {
-    transform: translate3d(-16px, -40px, 0) rotate(2.2deg);
+    transform: var(--minipage-right-perspective, perspective(1000px) rotateY(-5deg)) scale(var(--minipage-3-scale, 0.92)) rotate(var(--minipage-3-rotate, 1.4deg)) translateY(-9px);
   }
 }
 
 /* --------------------------------------------------------------------------
-   Node 4 (Delta / Lower-Right Outer Orbit):
-   Menggantung lebih rendah dan terdorong keluar ke kanan bawah
+   Node 4 (Delta / Kanan Belakang): Paling kecil, soft blur dekat lampu vintage
    -------------------------------------------------------------------------- */
 .orbital-node--4 {
-  align-self: flex-end;
-  margin-right: -1.5rem;
-  margin-top: 1rem;
-  transform: translate3d(32px, 28px, 0) rotate(-1.2deg);
+  top: var(--minipage-4-top, 14%);
+  left: var(--minipage-4-left, 80%);
+  transform: var(--minipage-right-perspective, perspective(1000px) rotateY(-5deg)) scale(var(--minipage-4-scale, 0.78)) rotate(var(--minipage-4-rotate, -1deg));
+  filter: blur(var(--minipage-4-blur, 1.8px));
+  z-index: var(--minipage-4-z, 5);
   animation: orbit-levitate-4 7.5s ease-in-out infinite alternate 2.5s;
 }
 
 @keyframes orbit-levitate-4 {
   0% {
-    transform: translate3d(32px, 28px, 0) rotate(-1.2deg);
-  }
-  50% {
-    transform: translate3d(40px, 18px, 0) rotate(-0.3deg);
+    transform: var(--minipage-right-perspective, perspective(1000px) rotateY(-5deg)) scale(var(--minipage-4-scale, 0.78)) rotate(var(--minipage-4-rotate, -1deg)) translateY(0px);
   }
   100% {
-    transform: translate3d(24px, 36px, 0) rotate(-1.8deg);
+    transform: var(--minipage-right-perspective, perspective(1000px) rotateY(-5deg)) scale(var(--minipage-4-scale, 0.78)) rotate(var(--minipage-4-rotate, -1deg)) translateY(-6px);
   }
 }
 
@@ -226,7 +218,9 @@
 .orbital-node:focus-visible,
 .orbital-node:focus-within {
   animation-play-state: paused;
-  z-index: 25;
+  transform: scale(1.05) translateY(-8px) rotate(0deg) !important;
+  filter: blur(0px) !important;
+  z-index: 25 !important;
 }
 
 /* ==========================================================================
@@ -234,8 +228,8 @@
    ========================================================================== */
 @media (max-height: 820px) {
   .orbital-node--1 {
-    transform: translate3d(-12px, -14px, 0) rotate(-1deg);
-    margin-right: 0.75rem;
+    transform: var(--minipage-left-perspective, perspective(1000px) rotateY(5deg)) scale(var(--minipage-1-scale, 0.90)) translate3d(6px, -10px, 0) rotate(-1deg);
+    margin-right: 0.5rem;
   }
 
   .orbital-node--2 {
@@ -256,8 +250,8 @@
   }
 
   @keyframes orbit-levitate-1 {
-    0% { transform: translate3d(-12px, -14px, 0) rotate(-1deg); }
-    100% { transform: translate3d(-16px, -8px, 0) rotate(-1.5deg); }
+    0% { transform: var(--minipage-left-perspective, perspective(1000px) rotateY(5deg)) scale(var(--minipage-1-scale, 0.90)) translate3d(6px, -10px, 0) rotate(-1deg); }
+    100% { transform: var(--minipage-left-perspective, perspective(1000px) rotateY(5deg)) scale(var(--minipage-1-scale, 0.90)) translate3d(6px, -4px, 0) rotate(-1.5deg); }
   }
 
   @keyframes orbit-levitate-2 {

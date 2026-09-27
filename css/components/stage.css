@@ -21,12 +21,12 @@
   z-index: 1;
 }
 
-/* Pedestal Rock Foundation & Desk Mat Contact Shadow */
+/* Pedestal Rock Foundation & Desk Mat Contact Shadow Layer */
 .moss-pedestal {
   position: relative;
   width: 100%;
   max-width: 640px;
-  margin-top: -8px;
+  margin-top: -1px;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -34,13 +34,150 @@
   pointer-events: none;
 }
 
-
+/* 1. Contact Shadow: Soft black brush, opacity 60-70%, small size, directly under laptop body on mousepad, blend mode multiply */
 .laptop-contact-shadow {
-  width: 86%;
-  height: 24px;
-  background: radial-gradient(ellipse at center, rgba(16, 12, 9, 0.75) 0%, rgba(16, 12, 9, 0.3) 50%, transparent 80%);
-  filter: blur(8px);
-  margin-top: -8px;
+  position: relative;
+  width: 84%;
+  height: 10px;
+  background: radial-gradient(
+    ellipse at 50% 20%,
+    #000000 0%,
+    rgba(0, 0, 0, 0.75) 30%,
+    rgba(0, 0, 0, 0.35) 60%,
+    transparent 85%
+  );
+  filter: blur(2px);
+  margin-top: -2px;
+  z-index: 4;
+  opacity: 0.66;
+  mix-blend-mode: multiply;
+  transition: 
+    transform var(--duration-hover) var(--ease-hover),
+    opacity var(--duration-hover) var(--ease-hover),
+    filter var(--duration-hover) var(--ease-hover);
+}
+
+/* Sharp contact seam right where laptop body touches mousepad */
+.laptop-contact-shadow::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 2%;
+  width: 96%;
+  height: 3px;
+  background: #000000;
+  border-radius: 50%;
+  filter: blur(1px);
+  opacity: 0.70;
+  mix-blend-mode: multiply;
+}
+
+/* 2. Directional Cast Shadow: Soft, elongated shadow extending to the LEFT across wooden desk */
+.laptop-cast-shadow {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  width: 155%;
+  height: 85px;
+  background: radial-gradient(
+    ellipse at 78% 30%,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.40) 28%,
+    rgba(0, 0, 0, 0.18) 55%,
+    rgba(0, 0, 0, 0.05) 75%,
+    transparent 90%
+  );
+  transform: translate3d(calc(-50% - 135px), 6px, 0) skewX(-24deg) scaleX(1.35);
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.65;
+  mix-blend-mode: multiply;
+  transition: 
+    transform var(--duration-hover) var(--ease-hover),
+    opacity var(--duration-hover) var(--ease-hover),
+    filter var(--duration-hover) var(--ease-hover);
+}
+
+/* Secondary upright screen-lid cast shadow reaching back-left across the desk & background */
+.laptop-cast-shadow::before {
+  content: '';
+  position: absolute;
+  top: -65px;
+  right: 12%;
+  width: 85%;
+  height: 130px;
+  background: radial-gradient(
+    ellipse at 80% 68%,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.22) 36%,
+    rgba(0, 0, 0, 0.05) 68%,
+    transparent 88%
+  );
+  transform: skewX(-32deg) rotate(-4deg);
+  filter: blur(26px);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* 3. Screen Emission: Soft rectangular pool of cool 7000K light extending forward 15-20cm onto desk surface */
+.laptop-screen-desk-glow {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) perspective(500px) rotateX(28deg);
+  width: 90%;
+  height: 64px;
+  background: 
+    /* Central cool 7000K blue-white rectangular pool */
+    radial-gradient(
+      ellipse at 50% 12%,
+      var(--cool-screen-glow) 0%,
+      var(--cool-screen-glow-mid) 35%,
+      var(--cool-screen-glow-soft) 62%,
+      transparent 82%
+    );
+  filter: blur(14px);
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.94;
+}
+
+/* Volumetric light scattering haze in the air in front of the screen */
+.laptop-screen-desk-glow::before {
+  content: '';
+  position: absolute;
+  top: -45px;
+  left: 10%;
+  width: 80%;
+  height: 65px;
+  background: radial-gradient(
+    ellipse at 50% 60%,
+    rgba(145, 195, 255, 0.14) 0%,
+    rgba(165, 145, 255, 0.05) 50%,
+    transparent 78%
+  );
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+/* Interactive Elevation Response when Hovering the Laptop */
+.podium-center:hover .laptop-contact-shadow {
+  opacity: 0.65;
+  filter: blur(5px);
+  transform: scaleX(0.96) translateY(2px);
+}
+
+.podium-center:hover .laptop-cast-shadow {
+  opacity: 0.82;
+  filter: blur(24px);
+  transform: translate3d(calc(-50% - 150px), 12px, 0) skewX(-24deg) scaleX(1.42);
+}
+
+.podium-center:hover .laptop-screen-desk-glow {
+  opacity: 1;
+  filter: blur(18px);
+  transform: translateX(-50%) scale(1.08);
 }
 
 /* Carousel Dots Wrapper sitting cleanly below the laptop base */
@@ -53,8 +190,21 @@
 
 @media (max-width: 640px) {
   .moss-pedestal {
-    margin-top: -6px;
+    margin-top: -1px;
     max-width: 92%;
+  }
+
+  .laptop-contact-shadow {
+    width: 88%;
+    height: 9px;
+    filter: blur(2px);
+  }
+
+  .laptop-cast-shadow {
+    width: 125%;
+    height: 55px;
+    transform: translate3d(calc(-50% - 60px), 4px, 0) skewX(-16deg);
+    filter: blur(14px);
   }
 
   .pedestal-info-wrapper {
@@ -64,8 +214,18 @@
 
 @media (max-height: 820px) {
   .moss-pedestal {
-    margin-top: -6px;
+    margin-top: -1px;
     max-width: 530px;
+  }
+
+  .laptop-contact-shadow {
+    height: 9px;
+  }
+
+  .laptop-cast-shadow {
+    height: 65px;
+    transform: translate3d(calc(-50% - 90px), 4px, 0) skewX(-18deg);
+    filter: blur(16px);
   }
 
   .pedestal-info-wrapper {

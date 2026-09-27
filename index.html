@@ -34,26 +34,45 @@
 
     <!-- Top Site Header & Floating Pill Navbar -->
     <header class="site-header">
-      <a href="#" class="brand-logo" id="brand-logo" aria-label="ProductZero Home">
+      <a href="#" class="brand-logo brand-badge" id="brand-logo" aria-label="ProductZero Home">
         productzero
       </a>
 
       <!-- Center Header Card Title (Replaces Floating Pill Navbar) -->
-      <div class="header-product-badge" id="header-product-badge" role="status" aria-live="polite"
+      <div class="header-product-badge project-title" id="header-product-badge" role="status" aria-live="polite"
         title="Active Product: Click to view details">
         <span class="card-title header-card-title" id="header-card-title">Apex CRM</span>
         <span class="header-card-badge" id="header-card-badge">v3.0</span>
       </div>
 
-      <!-- Right Action: Tactile Audio Toggle Button -->
-      <button class="header-action-btn" id="sound-toggle-btn" aria-label="Toggle Tactile Haptics Sound"
-        title="Tactile Sound FX">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-        </svg>
-      </button>
+      <!-- Header Actions: Day/Night Mode & Tactile Audio -->
+      <div class="header-actions" style="display: flex; align-items: center; gap: 0.5rem;">
+        <!-- Day / Night Mode Toggle Button (SPEC.md Section 6) -->
+        <button class="header-action-btn mode-toggle" id="theme-toggle-btn" aria-label="Toggle Day / Night Mode"
+          title="Mode Siang / Malam">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+
+        <!-- Right Action: Tactile Audio Toggle Button -->
+        <button class="header-action-btn mode-toggle" id="sound-toggle-btn" aria-label="Toggle Tactile Haptics Sound"
+          title="Tactile Sound FX">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+        </button>
+      </div>
     </header>
 
     <!-- Main Showcase Arena -->
@@ -82,12 +101,12 @@
         <!-- Left Desktop Column: Orbital Nodes for Active Product -->
         <div class="cards-column cards-column--left" id="mini-show-col-left" aria-label="Active Product Views (Left)">
           <div class="orbital-node orbital-node--1">
-            <div class="mini-show-page" id="mini-page-1" role="button" tabindex="0" aria-label="Live Operations Preview">
+            <div class="mini-show-page mini-page" id="mini-page-1" role="button" tabindex="0" aria-label="Live Operations Preview">
               <!-- Dynamically populated by JS for currently active product -->
             </div>
           </div>
           <div class="orbital-node orbital-node--2">
-            <div class="mini-show-page" id="mini-page-2" role="button" tabindex="0" aria-label="Timeline & Milestones Preview">
+            <div class="mini-show-page mini-page" id="mini-page-2" role="button" tabindex="0" aria-label="Timeline & Milestones Preview">
               <!-- Dynamically populated by JS for currently active product -->
             </div>
           </div>
@@ -99,7 +118,7 @@
           <div class="stage-glow" aria-hidden="true"></div>
 
           <!-- Carousel Curved Left Button -->
-          <button class="carousel-btn carousel-btn--prev" id="carousel-prev" aria-label="Previous Product">
+          <button class="carousel-btn arrow-button carousel-btn--prev" id="carousel-prev" aria-label="Previous Product">
             <svg viewBox="0 0 24 24">
               <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
@@ -124,15 +143,17 @@
           </div>
 
           <!-- Carousel Curved Right Button -->
-          <button class="carousel-btn carousel-btn--next" id="carousel-next" aria-label="Next Product">
+          <button class="carousel-btn arrow-button carousel-btn--next" id="carousel-next" aria-label="Next Product">
             <svg viewBox="0 0 24 24">
               <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </button>
 
-          <!-- Studio Desk Contact Shadow Layer -->
+          <!-- Studio Desk Contact & Directional Cast Shadow Layer -->
           <div class="moss-pedestal" aria-hidden="true">
             <div class="laptop-contact-shadow"></div>
+            <div class="laptop-cast-shadow"></div>
+            <div class="laptop-screen-desk-glow"></div>
           </div>
 
           <!-- Bottom Info Pill Card sitting directly over the pedestal -->
@@ -147,12 +168,12 @@
         <!-- Right Desktop Column: Orbital Nodes for Active Product -->
         <div class="cards-column cards-column--right" id="mini-show-col-right" aria-label="Active Product Views (Right)">
           <div class="orbital-node orbital-node--3">
-            <div class="mini-show-page" id="mini-page-3" role="button" tabindex="0" aria-label="Live Telemetry & SLAs Preview">
+            <div class="mini-show-page mini-page" id="mini-page-3" role="button" tabindex="0" aria-label="Live Telemetry & SLAs Preview">
               <!-- Dynamically populated by JS for currently active product -->
             </div>
           </div>
           <div class="orbital-node orbital-node--4">
-            <div class="mini-show-page" id="mini-page-4" role="button" tabindex="0" aria-label="Ecosystem & Modules Preview">
+            <div class="mini-show-page mini-page" id="mini-page-4" role="button" tabindex="0" aria-label="Ecosystem & Modules Preview">
               <!-- Dynamically populated by JS for currently active product -->
             </div>
           </div>
@@ -169,11 +190,11 @@
 
       <!-- Gen-Z Quick Filter Tags -->
       <div class="filter-tags" aria-label="Category Filters">
-        <button class="filter-tag-btn active" data-tag="all">#All Products</button>
-        <button class="filter-tag-btn" data-tag="saas">#SaaS & CRM</button>
-        <button class="filter-tag-btn" data-tag="analytics">#Analytics</button>
-        <button class="filter-tag-btn" data-tag="commerce">#eCommerce</button>
-        <button class="filter-tag-btn" data-tag="ai">#Autonomous AI</button>
+        <button class="filter-tag-btn tag active" data-tag="all">#All Products</button>
+        <button class="filter-tag-btn tag" data-tag="saas">#SaaS & CRM</button>
+        <button class="filter-tag-btn tag" data-tag="analytics">#Analytics</button>
+        <button class="filter-tag-btn tag" data-tag="commerce">#eCommerce</button>
+        <button class="filter-tag-btn tag" data-tag="ai">#Autonomous AI</button>
       </div>
     </footer>
 

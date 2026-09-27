@@ -29,6 +29,19 @@ body {
   position: relative;
 }
 
+/* Desktop Strict Viewport Lock: Zero Scrollbars, Edge-to-Edge */
+@media (min-width: 1025px) {
+  html,
+  body {
+    height: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+}
+
 img,
 svg,
 video,

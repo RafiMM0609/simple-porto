@@ -117,45 +117,153 @@
 /* ==========================================================================
    Mini Show Page (Desktop Flanking Preview Cards of Currently Active Product)
    ========================================================================== */
+.mini-page,
 .mini-show-page {
   display: flex;
   flex-direction: column;
   width: 250px;
   min-height: 145px;
-  background: var(--theme-card-surface);
+  background: var(--minipage-bg-gradient, linear-gradient(180deg, rgba(25, 30, 45, 0.95), rgba(15, 20, 35, 0.95)));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--theme-border-subtle);
-  border-radius: var(--radius-lg);
+  border: var(--minipage-border, 1px solid rgba(255, 255, 255, 0.1));
+  border-radius: var(--minipage-radius, 8px);
   padding: 0.65rem 0.8rem;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--minipage-shadow, 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    -15px 20px 30px rgba(0, 0, 0, 0.4),
+    -5px 8px 15px rgba(0, 0, 0, 0.3)
+  );
   cursor: pointer;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   user-select: none;
+  filter: var(--minipage-filter, sepia(0.1) brightness(0.95) saturate(0.9));
   transform: translateY(0) scale(1);
   transition: 
     transform var(--duration-hover-out) var(--ease-hover-out),
     border-color var(--duration-hover-out) var(--ease-smooth),
     box-shadow var(--duration-hover-out) var(--ease-smooth),
     background-color var(--duration-hover-out) var(--ease-smooth),
+    filter var(--duration-hover-out) var(--ease-smooth),
     opacity 0.3s ease;
 }
 
+/* Warm Sunlight Rim Highlight on Right Edge (DETAILS.md 1.6 & v1.1) */
+.mini-page::before,
+.mini-show-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
+  height: 100%;
+  background: var(--minipage-rim-highlight, linear-gradient(to left, rgba(255, 220, 150, 0.15), transparent));
+  pointer-events: none;
+  z-index: 10;
+  border-top-right-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+/* Grounded Shadow Cast Left-Down (DETAILS.md 1.1 — mapRange + easeOutQuad) */
+.mini-page::after,
+.mini-show-page::after {
+  content: '';
+  position: absolute;
+  bottom: calc(-1 * var(--dynamic-shadow-offset-y, 35px));
+  left: var(--dynamic-shadow-offset-x, -42px);
+  width: 240px;
+  height: 60px;
+  background: var(--minipage-shadow-ground, radial-gradient(ellipse at center, rgba(50, 30, 16, 0.6) 0%, rgba(50, 30, 16, 0.24) 48%, transparent 70%));
+  filter: blur(var(--dynamic-shadow-blur, 15px));
+  transform: var(--minipage-shadow-ground-transform, scaleY(0.32) rotateX(75deg));
+  pointer-events: none;
+  z-index: -1;
+  opacity: var(--dynamic-shadow-opacity, 0.75);
+  transition: 
+    transform var(--duration-hover) var(--ease-hover),
+    opacity var(--duration-hover) var(--ease-hover),
+    filter var(--duration-hover) var(--ease-hover),
+    bottom var(--duration-hover) var(--ease-hover),
+    left var(--duration-hover) var(--ease-hover);
+}
+
+.mini-page:hover,
 .mini-show-page:hover,
+.mini-page:focus-visible,
 .mini-show-page:focus-visible {
-  background: var(--theme-card-surface-hover);
-  border-color: rgba(var(--theme-mint-rgb), 0.38);
+  background: var(--card-navy-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  filter: var(--minipage-filter-hover, sepia(0.06) brightness(0.98) saturate(0.95));
   transform: translateY(-6px) scale(1.025);
-  box-shadow: 
-    0 16px 40px rgba(0, 0, 0, 0.45),
-    0 0 25px rgba(var(--theme-primary-rgb), 0.25);
+  box-shadow: var(--shadow-directional-card-hover);
   transition: 
     transform var(--duration-hover) var(--ease-hover),
     border-color var(--duration-hover) var(--ease-hover),
     box-shadow var(--duration-hover) var(--ease-hover),
     background-color var(--duration-hover) var(--ease-hover),
+    filter var(--duration-hover) var(--ease-hover),
     opacity 0.3s ease;
+}
+
+.mini-page:hover::after,
+.mini-show-page:hover::after {
+  bottom: calc(-1 * var(--dynamic-shadow-offset-y-hover, 65px));
+  left: var(--dynamic-shadow-offset-x-hover, -78px);
+  filter: blur(var(--dynamic-shadow-blur-hover, 22px));
+  opacity: var(--dynamic-shadow-opacity-hover, 0.55);
+  transform: scaleY(0.28) rotateX(75deg) scale(1.08);
+}
+
+/* Individualized Floating Card Shadows: Pure DARK shadows falling left-down (DETAILS.md 1.2 - v1.4) */
+/* 1. Top-Left Card ("Aura AI Core Flow"): Shadow falls onto bookshelf, blur 25-30px, opacity 0.3-0.4 */
+.orbital-node--1 .mini-show-page,
+.orbital-node--1 .mini-page {
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    -16px 20px 30px rgba(0, 0, 0, 0.40),
+    -5px 8px 15px rgba(0, 0, 0, 0.30);
+}
+
+/* 2. Top-Right Card ("Aura AI Telemetry"): Shadow falls onto window/shelf, blur 25-30px, opacity 0.3-0.4 */
+.orbital-node--3 .mini-show-page,
+.orbital-node--3 .mini-page {
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    -14px 18px 28px rgba(0, 0, 0, 0.35),
+    -5px 8px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* 3. Bottom-Left Card ("Aura AI Timeline"): Shadow falls onto desk surface, blur 25-30px, opacity 0.3-0.4 */
+.orbital-node--2 .mini-show-page,
+.orbital-node--2 .mini-page {
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    -15px 20px 30px rgba(0, 0, 0, 0.40),
+    -6px 9px 15px rgba(0, 0, 0, 0.30);
+}
+
+/* 4. Bottom-Right Card ("Aura AI Modules"): Shadow falls onto books/glasses, blur 25-30px, opacity 0.3-0.4 */
+.orbital-node--4 .mini-show-page,
+.orbital-node--4 .mini-page {
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    -14px 18px 28px rgba(0, 0, 0, 0.38),
+    -5px 8px 14px rgba(0, 0, 0, 0.28);
+}
+
+.orbital-node--1:hover .mini-show-page,
+.orbital-node--1:hover .mini-page,
+.orbital-node--3:hover .mini-show-page,
+.orbital-node--3:hover .mini-page {
+  box-shadow: var(--shadow-card-top-hover);
+}
+
+.orbital-node--2:hover .mini-show-page,
+.orbital-node--2:hover .mini-page,
+.orbital-node--4:hover .mini-show-page,
+.orbital-node--4:hover .mini-page {
+  box-shadow: var(--shadow-card-bottom-hover);
 }
 
 .mini-show-page:active {
@@ -168,9 +276,9 @@
   transform: scale(0.97);
 }
 
-/* Mini Window Bar */
+/* Mini Window Bar (Removed in v1.5 per DETAILS.md 1.7 - retained for test backward compatibility) */
 .mini-page-header {
-  display: flex;
+  display: none !important;
   align-items: center;
   justify-content: space-between;
   gap: 0.4rem;
@@ -180,7 +288,7 @@
 }
 
 .mini-window-dots {
-  display: flex;
+  display: none !important;
   gap: 4px;
   align-items: center;
 }
@@ -386,19 +494,20 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  border-radius: var(--radius-md);
+  border-radius: calc(var(--minipage-radius, 8px) - 2px);
   overflow: hidden;
   background: #000;
-  min-height: 98px;
+  min-height: 124px;
+  height: 100%;
 }
 
 .mini-video-frame {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 98px;
+  min-height: 124px;
   overflow: hidden;
-  border-radius: var(--radius-md);
+  border-radius: inherit;
 }
 
 .mini-webm-video {

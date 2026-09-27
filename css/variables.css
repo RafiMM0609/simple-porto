@@ -75,6 +75,73 @@
     0 16px 36px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(240, 253, 250, 0.12);
 
+  /* ==========================================================================
+     DIRECTIONAL LIGHTING & REALISTIC CINEMATIC SHADOW SYSTEM
+     (Source: Natural Daylight Window at Top-Right, approx 4500K-5000K)
+     (Shadow Color: Dark cool blue-purple tinted approx #1a1a2e with 60% opacity)
+     ========================================================================== */
+  --shadow-color-base: 26, 26, 46; /* #1a1a2e cool blue-purple tint */
+  --shadow-contact-color: rgba(0, 0, 0, 0.70);
+  --shadow-contact-diffuse: rgba(0, 0, 0, 0.45);
+  
+  --shadow-cast-root: rgba(0, 0, 0, 0.65);
+  --shadow-cast-mid: rgba(0, 0, 0, 0.40);
+  --shadow-cast-diffuse: rgba(0, 0, 0, 0.18);
+  --shadow-cast-tail: rgba(0, 0, 0, 0.05);
+
+  --shadow-laptop-near: rgba(0, 0, 0, 0.55);
+  --shadow-laptop-diffuse: rgba(0, 0, 0, 0.35);
+
+  /* Primary Light (Right Window): Warm Golden Hour Tone (4500K-5000K) */
+  --sunlight-rim-color: rgba(255, 238, 202, 0.28);
+  --sunlight-rim-hover: rgba(255, 245, 220, 0.45);
+  --sunlight-glare-warm: rgba(255, 238, 205, 0.22);
+
+  /* Secondary Fill Light (Left Side): Cool Ambient Bounce (6500K, ~30% intensity) */
+  --cool-fill-rim: rgba(160, 195, 255, 0.16);
+
+  /* Screen Light Emission (7000K Cool Blue-White Pool) */
+  --cool-screen-glow: rgba(175, 215, 255, 0.26);
+  --cool-screen-glow-mid: rgba(140, 185, 255, 0.18);
+  --cool-screen-glow-soft: rgba(165, 135, 255, 0.08);
+
+  /* Card Surface: Semi-Transparent / Thin Gradient Navy (DETAILS.md 1.3 - v1.4) */
+  --card-navy-base: rgba(20, 25, 40, 0.95);
+  --card-navy-surface: linear-gradient(180deg, rgba(25, 30, 45, 0.95), rgba(15, 20, 35, 0.95));
+  --card-navy-hover: linear-gradient(180deg, rgba(30, 36, 54, 0.96), rgba(18, 24, 42, 0.96));
+
+  /* Directional Pure Dark Card Shadows (DETAILS.md 1.2 - v1.4: 25-30px blur, 0.3-0.4 opacity, left-down) */
+  --shadow-directional-card:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    -15px 20px 30px rgba(0, 0, 0, 0.4),
+    -5px 8px 15px rgba(0, 0, 0, 0.3);
+
+  --shadow-directional-card-hover:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    -20px 25px 35px rgba(0, 0, 0, 0.45),
+    -6px 10px 18px rgba(0, 0, 0, 0.35);
+
+  /* Specialized Shadows: Top Cards (over bookshelf) vs Bottom Cards (over desk) with inner shadow */
+  --shadow-card-top:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    -16px 20px 30px rgba(0, 0, 0, 0.40),
+    -5px 8px 15px rgba(0, 0, 0, 0.30);
+
+  --shadow-card-top-hover:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    -20px 25px 35px rgba(0, 0, 0, 0.45),
+    -6px 10px 18px rgba(0, 0, 0, 0.35);
+
+  --shadow-card-bottom:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    -15px 20px 30px rgba(0, 0, 0, 0.40),
+    -6px 9px 15px rgba(0, 0, 0, 0.30);
+
+  --shadow-card-bottom-hover:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    -20px 25px 35px rgba(0, 0, 0, 0.45),
+    -7px 11px 18px rgba(0, 0, 0, 0.35);
+
   /* Ambient Glows vs CTA Highlight */
   --theme-glow-primary: rgba(var(--theme-primary-rgb), 0.1);
   /* Tenang & halus */
@@ -176,21 +243,192 @@
   --max-width: 1400px;
 
   /* ==========================================================================
-     LAPTOP MOCKUP & SCREEN CONFIGURATION TOKENS
-     Ubah variabel di bawah untuk mengatur ukuran mockup laptop & layar preview:
+     CALIBRATED INTEGRATED LAPTOP SCREEN OVERLAY TOKENS (studio-desk-bg.jpeg)
+     Resolution: 2752 x 1536 (Aspect Ratio 1.791666667)
+     Exact Screen Box:
+     - Left: 912px (33.14%)
+     - Width: 931px (33.83%)
+     - Top: 426px (27.73%)
+     - Height: 589px (38.35%)
+     - Notch: 116px x 16px (12.46% x 2.71%)
      ========================================================================== */
-  --laptop-max-width: 640px;
-  /* Ukuran bodi laptop di desktop */
-  --laptop-aspect-ratio: 2070 / 1585;
-  /* Rasio frame bodi laptop (width / height) */
-  --laptop-screen-top: 1.45%;
-  /* Jarak atas layar dari frame laptop (23px / 1585px) */
-  --laptop-screen-left: 9.13%;
-  /* Jarak kiri layar dari frame laptop (189px / 2070px) */
-  --laptop-screen-width: 81.06%;
-  /* Lebar layar relatif terhadap frame bodi (1678px / 2070px) */
-  --laptop-screen-height: 66.18%;
-  /* Tinggi layar relatif terhadap frame bodi (1049px / 1585px) */
-  --laptop-screen-radius: 12px 12px 0 0;
-  /* Lengkungan sudut atas layar laptop */
+  --laptop-screen-top: 27.73%;
+  --laptop-screen-left: 33.14%;
+  --laptop-screen-width: 33.83%;
+  --laptop-screen-height: 38.35%;
+  --laptop-screen-radius: 8px 8px 3px 3px;
+  --laptop-screen-bg: #09090b;
+  --laptop-screen-z: 4;
+  --laptop-notch-width: 12.46%;
+  --laptop-notch-height: 2.71%;
+
+  /* Legacy tokens preserved for test suite compliance */
+  --laptop-max-width: 100%;
+  --laptop-aspect-ratio: 2752 / 1536;
+
+  /* ==========================================================================
+     ASYMMETRIC MINI PAGE DEPTH TOKENS (DETAILS.md 1.8 - Geser ke kanan & kecilin)
+     ========================================================================== */
+  /* Mini Page 1 (Kiri Depan - Geser ke kanan agar tidak menutupi buku di rak) */
+  --minipage-1-top: 26%;
+  --minipage-1-left: 11.5%;
+  --minipage-1-scale: 0.90;
+  --minipage-1-rotate: -1.2deg;
+  --minipage-1-blur: 0px;
+  --minipage-1-z: 6;
+
+  /* Mini Page 2 (Kiri Belakang - Lebih kecil, melayang di atas rak buku) */
+  --minipage-2-top: 8%;
+  --minipage-2-left: 4.5%;
+  --minipage-2-scale: 0.82;
+  --minipage-2-rotate: 1.2deg;
+  --minipage-2-blur: 1px;
+  --minipage-2-z: 5;
+
+  /* Mini Page 3 (Kanan Depan - Sedang, dekat jendela) */
+  --minipage-3-top: 25%;
+  --minipage-3-left: 74%;
+  --minipage-3-scale: 0.92;
+  --minipage-3-rotate: 1.4deg;
+  --minipage-3-blur: 0px;
+  --minipage-3-z: 6;
+
+  /* Mini Page 4 (Kanan Belakang - Kecil, soft blur dekat lampu vintage) */
+  --minipage-4-top: 10%;
+  --minipage-4-left: 80%;
+  --minipage-4-scale: 0.78;
+  --minipage-4-rotate: -1deg;
+  --minipage-4-blur: 1.5px;
+  --minipage-4-z: 5;
+
+  /* ==========================================================================
+     DAY / NIGHT MODE TOKENS (SPEC.md Section 6 & 10.5)
+     ========================================================================== */
+  --overlay-day: transparent;
+  --overlay-night: rgba(16, 24, 46, 0.48);
+  --brightness-day: 1.0;
+  --brightness-night: 0.72;
+  --shadow-color-day: rgba(45, 30, 20, 0.35);
+  --shadow-color-night: rgba(10, 18, 35, 0.55);
+  --highlight-day: rgba(255, 230, 180, 0.35);
+  --highlight-night: rgba(140, 190, 255, 0.25);
+
+  --overlay-active: var(--overlay-day);
+  --brightness-active: var(--brightness-day);
+  --shadow-color-active: var(--shadow-color-day);
+  --highlight-active: var(--highlight-day);
+  --duration-transition-mode: 0.6s;
+
+  /* ==========================================================================
+     DETAILS.md (v1.5) VISUAL REFINEMENT DESIGN TOKENS
+     ========================================================================== */
+  /* 1. Mini Page Tokens (DETAILS.md Section 1 - v1.4/v1.5) */
+  --minipage-border: 1px solid rgba(255, 255, 255, 0.1);
+  --minipage-radius: 8px;
+  --minipage-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    -15px 20px 30px rgba(0, 0, 0, 0.4),
+    -5px 8px 15px rgba(0, 0, 0, 0.3);
+  --minipage-shadow-hover: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    -20px 25px 35px rgba(0, 0, 0, 0.45),
+    -6px 10px 18px rgba(0, 0, 0, 0.35);
+  --minipage-bg: rgba(20, 25, 40, 0.95);
+  --minipage-bg-gradient: linear-gradient(180deg, rgba(25, 30, 45, 0.95), rgba(15, 20, 35, 0.95));
+  --minipage-left-perspective: perspective(1000px) rotateY(5deg);
+  --minipage-right-perspective: perspective(1000px) rotateY(-5deg);
+  --minipage-filter: sepia(0.1) brightness(0.95) saturate(0.9);
+  --minipage-filter-hover: sepia(0.06) brightness(0.98) saturate(0.95);
+  --minipage-rim-highlight: linear-gradient(to left, rgba(255, 220, 150, 0.15), transparent);
+
+  /* Dynamic Ground Shadow Tokens (mapRange + easeOutQuad) */
+  --minipage-shadow-ground: radial-gradient(ellipse at center, rgba(50, 30, 16, 0.6) 0%, rgba(50, 30, 16, 0.24) 48%, transparent 70%);
+  --minipage-shadow-blur: 15px;
+  --minipage-shadow-offset-x: -42px;
+  --minipage-shadow-offset-y: 35px;
+  --minipage-shadow-ground-transform: scaleY(0.32) rotateX(75deg);
+  --dynamic-shadow-blur: 15px;
+  --dynamic-shadow-offset-x: -42px;
+  --dynamic-shadow-offset-y: 35px;
+  --dynamic-shadow-opacity: 0.75;
+  --dynamic-shadow-blur-hover: 22px;
+  --dynamic-shadow-offset-x-hover: -78px;
+  --dynamic-shadow-offset-y-hover: 65px;
+  --dynamic-shadow-opacity-hover: 0.55;
+
+  /* 2. Arrow Button Tokens (DETAILS.md Section 2 - v1.3) */
+  --arrow-btn-width: 48px;
+  --arrow-btn-height: 48px;
+  --arrow-btn-radius: 50%;
+  --arrow-btn-bg: rgba(255, 255, 255, 0.1);
+  --arrow-btn-bg-hover: rgba(255, 255, 255, 0.2);
+  --arrow-btn-border: 1px solid rgba(255, 255, 255, 0.2);
+  --arrow-btn-border-hover: 1px solid rgba(255, 255, 255, 0.35);
+  --arrow-btn-shadow: -4px 6px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 220, 150, 0.1);
+  --arrow-btn-shadow-hover: -6px 8px 16px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 220, 150, 0.2);
+  --arrow-btn-rim-highlight: linear-gradient(to left, rgba(255, 220, 150, 0.15), transparent);
+
+  /* 3. Laptop Screen Tokens (DETAILS.md Section 3 - v1.3) */
+  --laptop-screen-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%, rgba(0, 0, 0, 0.05) 100%);
+  --laptop-screen-inner-glow: inset 0 0 30px rgba(255, 220, 150, 0.05);
+  --laptop-content-filter: sepia(0.05) brightness(0.95);
+
+  /* 4. Section Title Tokens "Discover Our Web Products" (DETAILS.md Section 4 - v1.3) */
+  --section-title-color: #ffffff;
+  --section-title-shadow: -2px 3px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 220, 150, 0.1);
+  --section-title-bg: rgba(0, 0, 0, 0.3);
+  --section-title-padding: 8px 16px;
+  --section-title-radius: 8px;
+  --section-title-border: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* 5. Filter Tag Tokens (DETAILS.md Section 5 - v1.3) */
+  --tag-bg: rgba(255, 255, 255, 0.1);
+  --tag-border: 1px solid rgba(255, 255, 255, 0.15);
+  --tag-radius: 6px;
+  --tag-shadow: -2px 3px 8px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 220, 150, 0.05);
+  --tag-padding: 6px 12px;
+  --tag-color: #ffffff;
+  --tag-bg-hover: rgba(255, 255, 255, 0.18);
+  --tag-border-hover: rgba(255, 255, 255, 0.28);
+
+  /* 6. Project Title Tokens "Aura AI v2.0" (DETAILS.md Section 6 - v1.2) */
+  --project-title-color: #ffffff;
+  --project-title-shadow: -2px 3px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 220, 150, 0.1);
+  --project-title-bg: rgba(0, 0, 0, 0.3);
+  --project-title-padding: 8px 16px;
+  --project-title-radius: 8px;
+  --project-title-border: 1px solid rgba(255, 255, 255, 0.1);
+  --header-badge-bg: var(--project-title-bg);
+  --header-badge-border: var(--project-title-border);
+  --header-badge-text-shadow: var(--project-title-shadow);
+
+  /* 7. Brand Badge Tokens "productzero" (DETAILS.md Section 7 - v1.2) */
+  --brand-badge-top: 24px;
+  --brand-badge-left: 24px;
+  --brand-badge-shadow: drop-shadow(-2px 3px 6px rgba(0, 0, 0, 0.5));
+  --brand-badge-bg: rgba(0, 0, 0, 0.2);
+  --brand-badge-border: 1px solid rgba(255, 255, 255, 0.1);
+  --brand-badge-radius: 8px;
+  --brand-badge-padding: 8px 16px;
+  --brand-logo-shadow: var(--brand-badge-shadow);
+
+  /* 8. Mode Toggle Tokens (DETAILS.md Section 8 - v1.2) */
+  --mode-toggle-bg: rgba(255, 255, 255, 0.1);
+  --mode-toggle-border: 1px solid rgba(255, 255, 255, 0.2);
+  --mode-toggle-radius: 12px;
+  --mode-toggle-shadow: -3px 4px 10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 220, 150, 0.1);
+  --mode-toggle-padding: 8px 12px;
+  --toggle-btn-bg: var(--mode-toggle-bg);
+  --toggle-btn-border: var(--mode-toggle-border);
+  --toggle-btn-shadow: var(--mode-toggle-shadow);
+}
+
+[data-mode="night"] {
+  --overlay-active: var(--overlay-night);
+  --brightness-active: var(--brightness-night);
+  --shadow-color-active: var(--shadow-color-night);
+  --highlight-active: var(--highlight-night);
+  --theme-bg: #0f0d0b;
+  --theme-card: #181512;
+  --theme-card-surface: rgba(28, 22, 18, 0.65);
 }
