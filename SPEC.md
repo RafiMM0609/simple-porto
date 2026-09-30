@@ -16,7 +16,7 @@ Di atasnya:
 
 ## 2. Visual Reference & Background Asset
 
-**Background:** Foto meja kerja terintegrasi (contoh: `assets/background.jpg` atau `assets/studio-desk-bg.jpg`).
+**Background:** Foto meja kerja terintegrasi (contoh: `assets/background.webp` atau `assets/studio-desk-bg.webp`).
 
 **Karakteristik foto:**
 - Meja kayu hangat dengan rak buku, tanaman hias, lampu meja, dan laptop fisik (MacBook-style) tepat di tengah.

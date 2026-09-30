@@ -25,7 +25,7 @@
   pointer-events: none;
   background-image: 
     linear-gradient(180deg, rgba(20, 15, 12, 0.32) 0%, rgba(20, 15, 12, 0.08) 38%, rgba(20, 15, 12, 0.46) 100%),
-    url('../assets/studio-desk-bg.jpg');
+    url('../assets/studio-desk-bg.webp');
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
@@ -129,8 +129,7 @@
   overflow: visible;
   background-image: 
     linear-gradient(180deg, var(--overlay-active, transparent) 0%, var(--overlay-active, transparent) 100%),
-    url('../assets/studio-desk-bg.jpeg'),
-    url('../assets/studio-desk-bg.jpg');
+    url('../assets/studio-desk-bg.webp');
   background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;

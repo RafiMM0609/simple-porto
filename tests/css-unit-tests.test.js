@@ -373,8 +373,8 @@ test('Open-Chassis Matcha Laptop & Photorealistic Studio Workspace Coverage', ()
   const stageCss = fs.readFileSync(path.join(cssDir, 'components/stage.css'), 'utf8');
 
   assert.ok(
-    layoutCss.includes('studio-desk-bg.jpg'),
-    'layout.css must link studio-desk-bg.jpg for photorealistic studio background'
+    layoutCss.includes('studio-desk-bg.webp'),
+    'layout.css must link studio-desk-bg.webp for photorealistic studio background'
   );
 
   const keyboardSelectors = [
